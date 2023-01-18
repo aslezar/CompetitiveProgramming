@@ -1,6 +1,7 @@
 // 918. Maximum Sum Circular Subarray
 #include <iostream>
 #include <vector>
+#include <climits>
 using namespace std;
 
 #define el cout << '\n';
@@ -17,15 +18,26 @@ int maxSubarraySumCircular(vector<int> &nums)
     //     cout<<presum[i]<<' ';
     // }
     // cout<<'\n';
-    int localmax = nums[0];
-    int ans = -32165;
-    for (int i = 1; i < nums.size(); i++)
+    int localmaxsum = 0;
+    int localminsum = 0;
+    int totalsum = 0;
+    int gmaxsum = INT_MIN;
+    int gminsum = INT_MAX;
+    for (int i = 0; i < nums.size(); i++)
     {
-        localmax = max(nums[i], nums[i] + localmax);
-        ans = max(ans, localmax);
-        // ans=max(ans,localmax=max(nums[i],nums[i]+localmax));
+        totalsum += nums[i];
+
+        // localmaxsum = max(nums[i], nums[i] + localmaxsum);
+        // gmaxsum = max(gmaxsum, localmaxsum);
+        gmaxsum = max(gmaxsum, localmaxsum = max(nums[i], nums[i] + localmaxsum));
+
+        // cout << localmaxsum << ' ' << gmaxsum << ' ' << nums[i] << '\n';
+
+        // localminsum = min(nums[i], nums[i] + localminsum);
+        // gminsum = min(gminsum, localminsum);
+        gminsum = min(gminsum, localminsum = min(nums[i], nums[i] + localminsum));
     }
-    return ans;
+    return (totalsum == gminsum) ? gmaxsum : max(gmaxsum, totalsum - gminsum);
 }
 int main()
 {

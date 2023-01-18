@@ -1,3 +1,7 @@
+//Command
+g++ cur.cpp && ./a.out 0<input.txt && rm ./a.out
+
+
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
@@ -14,6 +18,7 @@ int main()
 		ll n=0; cin>>n;
 		ll ans=0;
 
+        //cout<<(?"yes":"no") el;
 		cout<<ans el;
 
 	}
