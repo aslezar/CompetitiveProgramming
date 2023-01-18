@@ -85,4 +85,4 @@ void fastscan(int &number)
     if (negative)
         number *= -1;
 }
-
+//edited
