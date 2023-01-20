@@ -1,3 +1,10 @@
+// 290. Word Pattern
+#include <iostream>
+#include <map>
+#include <sstream>
+using namespace std;
+
+#define el cout << '\n';
 bool wordPattern(string pattern, string s) {
 	map<string,char> m;
 	map<char,string> mp;
@@ -43,4 +50,9 @@ bool wordPattern(string pattern, string s) {
 	// }
 
 	return true;
+}
+int main()
+{
+    cout<<wordPattern("abba","dog cat cat dog");
+    return 0;
 }
