@@ -15,3 +15,5 @@ For LeetCode<br>
 daily problems saved as with that date as filename in LeetCode folder itself
 Contest problems saved in respective folder name
 input.txt in leetcode is neccessary to remove exe file after executing it
+
+_ in front of contest solved file means solved after contest
