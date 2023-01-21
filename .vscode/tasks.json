@@ -1,0 +1,71 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "C++: g++ build the active file coustom",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                // "-std=c++11",
+                "-O2",
+                // "-Wall",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "group": "build",
+            "presentation": {
+                "close": true,
+                "panel": "shared",
+                "reveal": "silent"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Remove files custom",
+            "type": "shell",
+            "command": "rm ${fileDirname}/${fileBasenameNoExtension}",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false,
+                "close": true
+            }
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++ build active file costom",
+            "command": "/bin/g++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "&&",
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "0<input.txt",
+                "&&",
+                "rm",
+                "${fileDirname}/${fileBasenameNoExtension}"                
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "compiler: /bin/g++"
+        }
+    ]
+}

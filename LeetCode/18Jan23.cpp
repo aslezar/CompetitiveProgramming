@@ -42,6 +42,6 @@ int maxSubarraySumCircular(vector<int> &nums)
 int main()
 {
     vector<int> nums({1, -2, 3, -2});
-    cout << maxSubarraySumCircular(nums);
+    cout << maxSubarraySumCircular(nums) << '\n';
     return 0;
 }
