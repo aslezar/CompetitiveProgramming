@@ -18,7 +18,7 @@ int main()
         cin >> a >> b;
 
         // cout<<(()?"yes":"no") el;
-        cout << a/b el;
+        cout << b/a el;
     }
     return 0;
 }
