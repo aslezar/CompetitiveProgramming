@@ -3,7 +3,7 @@
 #include <vector>
 using namespace std;
 
-#define el cout << '\n';
+#define el << '\n'
 
 vector<vector<int>> insertfn(vector<vector<int>> &intervals, vector<int> &newInterval)
 {

@@ -4,7 +4,7 @@
 #include <climits>
 using namespace std;
 
-#define el cout << '\n';
+#define el << '\n'
 
 long long ans;
 void backtrack(vector<int> &nums1, vector<int> &nums2, int k, long long sum, long long minterm, int index, int terms)

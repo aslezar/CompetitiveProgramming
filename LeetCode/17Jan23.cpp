@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-#define el cout << '\n';
+#define el << '\n'
 int minFlipsMonoIncr(string s)
 {
     int flip = 0, count = 0;

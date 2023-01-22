@@ -3,7 +3,7 @@
 #include <vector>
 #include <map>
 using namespace std;
-#define el cout << '\n';
+#define el << '\n'
 string smallestEquivalentString(string s1, string s2, string baseStr)
 {
     char a[30] = "abcdefghijklmnopqrstuvwxyz";
@@ -24,7 +24,7 @@ string smallestEquivalentString(string s1, string s2, string baseStr)
         // {
         //     cout << a[i] << ' ';
         // }
-        // el;
+        // cout el;
     }
     string ans;
     for (int i = 0; i < baseStr.length(); i++)
@@ -35,7 +35,7 @@ string smallestEquivalentString(string s1, string s2, string baseStr)
     // {
     //     cout << char('a' + i) << ' ' << a[i] << '\n';
     // }
-    // el
+    // cout el
     return ans;
 }
 int main()

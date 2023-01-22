@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-#define el cout << '\n';
+#define el << '\n'
 // bool valid(const string &s, int start, int length)
 // {
 //     cout << s << ' ' << start << ' ' << length;

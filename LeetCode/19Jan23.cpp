@@ -4,7 +4,7 @@
 #include <climits>
 using namespace std;
 
-#define el cout << '\n';
+#define el << '\n'';
 int subarraysDivByK(vector<int>& nums, int k) {
             vector<int> prefix(k,0);
             prefix[0]=1;

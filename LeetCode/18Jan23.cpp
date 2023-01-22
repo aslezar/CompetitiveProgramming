@@ -4,7 +4,7 @@
 #include <climits>
 using namespace std;
 
-#define el cout << '\n';
+#define el << '\n'
 int maxSubarraySumCircular(vector<int> &nums)
 {
     // vector<int> presum;

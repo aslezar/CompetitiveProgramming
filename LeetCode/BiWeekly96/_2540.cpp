@@ -3,7 +3,7 @@
 #include <vector>
 using namespace std;
 
-#define el cout << '\n';
+#define el << '\n'
 
 int getCommon(vector<int> &nums1, vector<int> &nums2)
 {

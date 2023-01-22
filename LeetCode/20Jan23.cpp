@@ -4,7 +4,7 @@
 #include <set>
 using namespace std;
 
-#define el cout << '\n';
+#define el << '\n'
 void backtrack(vector<int> &nums, vector<int> &seq, set<vector<int>> &result, int index)
 {
     if (index >= nums.size())

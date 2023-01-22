@@ -3,7 +3,7 @@
 #include <vector>
 using namespace std;
 
-#define el cout << '\n';
+#define el << '\n'
 
 long long minOperations(vector<int> &nums1, vector<int> &nums2, int k)
 {

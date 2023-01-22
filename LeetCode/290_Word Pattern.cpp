@@ -4,7 +4,7 @@
 #include <sstream>
 using namespace std;
 
-#define el cout << '\n';
+#define el << '\n'
 bool wordPattern(string pattern, string s) {
 	map<string,char> m;
 	map<char,string> mp;
