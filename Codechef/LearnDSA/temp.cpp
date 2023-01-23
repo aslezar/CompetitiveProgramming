@@ -1,27 +1,51 @@
-#include <iostream>
-#include <iomanip>
+// C++ Program to find root of an
+// equations using secant method
+#include <bits/stdc++.h>
 using namespace std;
-
-#define el << '\n'
-#define ws << ' '
-
-int main(int argc, char const *argv[])
+// function takes value of x and returns f(x)
+float f(float x)
 {
-    for (int i = 1; i < 10; i++)
-    {
-        for (int j = 0; j < 10; j++)
-        {
-            int s = i + j;
-            cout << i ws << j ws << setw(2) << s ws;
-            int sum = (i + j) % 10;
-            for (int k = 0; k < argv[1][0]; k++)
-            {
-                cout << setw(3) << (s % 3 ? "No" : "Yes") ws;
-                // cout << sum ws;
-                s += sum;
-                sum = ((sum * 2) % 10);
-            }
-            cout el;
-        }
-    }
+	// we are taking equation as x^3+x-1
+	float f = pow(x, 3) - x ;
+	return f;
+}
+
+void secant(float x1, float x2, float E)
+{
+	float n = 0, xm, x0, c;
+	if (f(x1) * f(x2) < 0) {
+		do {
+			// calculate the intermediate value
+			x0 = (x1 * f(x2) - x2 * f(x1)) / (f(x2) - f(x1));
+
+			// check if x0 is root of equation or not
+			c = f(x1) * f(x0);
+
+			// update the value of interval
+			x1 = x2;
+			x2 = x0;
+
+			// update number of iteration
+			n++;
+
+			// if x0 is the root of equation then break the loop
+			if (c == 0)
+				break;
+			xm = (x1 * f(x2) - x2 * f(x1)) / (f(x2) - f(x1));
+		} while (fabs(xm - x0) >= E); // repeat the loop
+								// until the convergence
+
+		cout << "Root of the given equation=" << x0 << endl;
+		cout << "No. of iterations = " << n << endl;
+	} else
+		cout << "Can not find a root in the given interval";
+}
+
+// Driver code
+int main()
+{
+	// initializing the values
+	float x1 = -0.75f, x2 = 0.5f, E = 0.0001;
+	secant(x1, x2, E);
+	return 0;
 }
