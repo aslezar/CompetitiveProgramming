@@ -12,6 +12,10 @@ using namespace std;
 
 // for every city we will store the all possible combinations to reach that city from src
 // then we will anaylze all route for dest city for the optimal ans
+/*Algorithm
+We calculated every k and its minimum price for every city node starting from src
+We then find the least ans from the soln list we genereated with the destination city as input
+ */
 struct path
 {
     int to;
@@ -33,8 +37,6 @@ void bfs(map<int, vector<path>> &flights, map<int, map<int, pair<int, bool>>> &s
         {
             // cout << '\t' << k.first ws << (*k.second.begin()).first ws << (*k.second.begin()).second el;
             int k_here = k.first;
-            // for (auto &&price : k.second)
-            // {
             if (k.second.second == false)
             {
                 for (auto &&dest : destination)
@@ -44,21 +46,20 @@ void bfs(map<int, vector<path>> &flights, map<int, map<int, pair<int, bool>>> &s
                         map<int, pair<int, bool>>::iterator it = soln[dest.to].find(k_here + 1);
                         if (it != soln[dest.to].end())
                         {
-                            if ((it->second.second) <= k.second.first + dest.price)
+                            if ((it->second.first) > k.second.first + dest.price)
+                            {
                                 (it->second) = {k.second.first + dest.price, 0};
-                            // it->second = 42;
-                            // soln[dest.to][k_here + 1][0].first = k.second.first + dest.price;
-                            // soln[dest.to][k_here + 1][0].second = 0;
+                                q.push(dest.to);
+                            }
                         }
                         else
                         {
                             soln[dest.to][k_here + 1] = {k.second.first + dest.price, 0};
+                            q.push(dest.to);
                         }
-                        q.push(dest.to);
                     }
                 }
                 k.second.second = true;
-                // }
             }
         }
         q.pop();
@@ -83,6 +84,7 @@ int findCheapestPrice(int n, vector<vector<int>> &flights, int src, int dst, int
     }
 
     // Print m
+    // cout << "m:\n";
     // for (auto &&i : m)
     // {
     //     cout << i.first el;
@@ -97,15 +99,15 @@ int findCheapestPrice(int n, vector<vector<int>> &flights, int src, int dst, int
         finalans = min(k.second.first, finalans);
 
     // // Print soln
-    cout << "Soln\n";
-    for (auto &&i : soln)
-    {
-        cout << i.first el;
-        for (auto &j : i.second)
-        {
-            cout << '\t' << j.first ws << j.second.first ws << j.second.second el;
-        }
-    }
+    // cout << "Soln\n";
+    // for (auto &&i : soln)
+    // {
+    //     cout << i.first el;
+    //     for (auto &j : i.second)
+    //     {
+    //         cout << '\t' << j.first ws << j.second.first ws << j.second.second el;
+    //     }
+    // }
 
     return finalans == INT_MAX ? -1 : finalans;
 }
