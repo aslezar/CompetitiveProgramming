@@ -41,6 +41,8 @@ int main()
             }
             s /= k;
         }
+        if (s > 0)
+            flag = 1;
         // cout << t el;
         if (!flag)
         {

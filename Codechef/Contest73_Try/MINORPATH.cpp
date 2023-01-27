@@ -1,14 +1,10 @@
 #include <iostream>
-#include <vector>
-#include <set>
-#include <algorithm>
-#include <map>
 #include <climits>
 using namespace std;
 
 #define ll long long
 #define el << '\n'
-#define ws << ' '0
+#define ws << ' ' 0
 
 const unsigned int mod = 1e9 + 7;
 const int maxn = 1e5 + 4;

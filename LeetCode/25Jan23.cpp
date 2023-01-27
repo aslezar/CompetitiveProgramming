@@ -29,16 +29,16 @@ void bfs(vector<int> &edges, vector<int> &dist, int startNode)
 
 int closestMeetingNode(vector<int> &edges, int node1, int node2)
 {
-    vector<int> dist1(edges.size(), INT_MAX), dist2(edges.size(), INT_MAX);
-    bfs(edges, dist1, node1);
-    bfs(edges, dist2, node2);
+    vector<int> distance1(edges.size(), INT_MAX), distance2(edges.size(), INT_MAX);
+    bfs(edges, distance1, node1);
+    bfs(edges, distance2, node2);
     int minDistNode = -1; // Out ans
     int minDistTillNow = INT_MAX;
     for (int i = 0; i < edges.size(); i++)
     {
-        if (minDistTillNow > max(dist1[i], dist2[i]))
+        if (minDistTillNow > max(distance1[i], distance2[i]))
         {
-            minDistTillNow = max(dist1[i], dist2[i]);
+            minDistTillNow = max(distance1[i], distance2[i]);
             minDistNode = i;
         }
     }
