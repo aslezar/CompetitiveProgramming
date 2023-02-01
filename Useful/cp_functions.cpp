@@ -10,7 +10,10 @@ int input(int a = 0)
     cin >> a;
     return a;
 }
-
+int mod(int a, int m)
+{
+    return (a % m + m) % m;
+}
 // For fast int read
 void fastscan(int &number)
 {
