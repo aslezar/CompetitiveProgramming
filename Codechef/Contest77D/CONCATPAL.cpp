@@ -25,11 +25,6 @@ int main()
         map<int, int> a;
         map<int, int> b;
         bool ans = 0;
-        for (int i = ; i < 26; i++)
-        {
-            a[i + 'a'] = 0;
-            b[i + 'a'] = 0;
-        }
         for (int i = 0; i < n; i++)
         {
             cin >> temp;
@@ -40,7 +35,7 @@ int main()
             cin >> temp;
             b[temp]++;
         }
-        int noofodd = 0;
+        int odd = 0;
         map<int, int> *ar = &a;
         map<int, int> *br = &b;
         int diff = n - m;
@@ -55,11 +50,11 @@ int main()
             (*ar)[i] -= (*br)[i];
             if ((*ar)[i] < 0)
             {
-                noofodd = 2;
+                odd = 2;
                 break;
             }
             if ((*ar)[i] % 2)
-                noofodd++;
+                odd++;
             // cout << (*ar)[i] ws;
         }
         // cout el;
@@ -67,12 +62,11 @@ int main()
         // {
         //     cout << (*br)[i] ws;
         // }
-        if (diff % 2 == noofodd)
+        if (diff % 2 == odd)
             ans = 1;
         // cout el << diff ws << noofodd ws << ans ws;
 
         cout << ((ans) ? "YES" : "NO")el;
-        // cout << ans el;
     }
     return 0;
 }

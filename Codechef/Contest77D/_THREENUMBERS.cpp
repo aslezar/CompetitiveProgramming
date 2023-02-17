@@ -23,26 +23,13 @@ int main()
         ll ans = -1;
         cin >> a >> b >> c;
         int no = a, no1 = b, no2 = c;
-        if (a == b)
+        if (a % 2 == b % 2 && b % 2 == c % 2)
         {
-            no = c;
-            no1 = a;
-            no2 = b;
+            int x = a + b + c - min(a, min(b,c));
+            x /= 2;
+            ans = 3 * x - a - b - c;
         }
-        else if (b == c)
-        {
-            no = a;
-            no1 = b;
-            no2 = c;
-        }
-        else if (a == c)
-        {
-            no = b;
-            no1 = a;
-            no2 = c;
-        }
-        if (no1 == no2 && (no - no1) % 2 == 0)
-            ans = (no - no1) / 2;
+        // cout<<(()?"YES":"NO") el;
         cout << ans el;
     }
     return 0;

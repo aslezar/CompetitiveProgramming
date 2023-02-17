@@ -25,38 +25,37 @@ int main()
         ll n = 0, k = 0;
         cin >> n >> k;
         int a[100000];
+        int sum = 0;
         for (int i = 0; i < n; i++)
         {
             cin >> a[i];
+            sum += a[i];
         }
-        int values = 0;
-        int max = 0;
-        for (int i = 0, l = n - 1; i <= l; i++, l--)
+
+        ll ans = 1;
+        for (int i = 0, l = n - 1; i < l; i++, l--)
         {
-            int tp = a[i] - a[l];
-            if (tp < 0)
-                tp *= -1;
-            if (tp)
+            if (a[i] != a[l])
             {
-                values++;
-                if (tp > max)
-                    max = tp;
+                ans = 0;
+                break;
             }
         }
-        ll ans = 0;
-        if (k == 1)
+        if (ans == 1)
             ans = 1;
-        if (k % 2 == 0)
-        {
-        }
         else
         {
-        }
-        if (n % 2 == 1)
-        {
-        }
-        else
-        {
+            if (k == n)
+            {
+                ans = 0;
+            }
+            else if (n % 2 == 0 && k % 2 == 0)
+            {
+                if (sum % 2 == 0)
+                    ans = 1;
+            }
+            else
+                ans = 1;
         }
 
         cout << ((ans) ? "YES" : "NO")el;
