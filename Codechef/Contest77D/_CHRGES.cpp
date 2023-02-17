@@ -23,50 +23,41 @@ int main()
         string a;
         cin >> n >> a;
         ll ans = 0;
-        int cnt = count(a.begin(), a.end(), '0');
-        if (n == 1)
-        {
-            if (a[0] == '0')
-                ans = 1;
-        }
-        else if (cnt == n)
-            ans = n;
-        else
-        {
-            bool flag = 0;
-            char lastchar = '\0';
-            cnt = 0;
+        bool flag = 0;
+        char lastchar = '\0';
+        int cnt = 0;
 
-            for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++)
+        {
+            if (flag)
             {
-                if (flag)
+                if (a[i] == '0')
                 {
-                    if (a[i] == '0')
-                    {
-                        cnt++;
-                    }
-                    else if (a[i] == lastchar)
-                    {
-                        cnt = 0;
-                    }
-                    else
-                    {
-                        if (cnt % 2 && cnt != 0)
-                            ans++;
-                        cnt = 0;
-                        lastchar = a[i];
-                    }
+                    cnt++;
+                }
+                else if (a[i] == lastchar)
+                {
+                    cnt = 0;
                 }
                 else
                 {
-                    if (a[i] != '0')
-                    {
-                        lastchar = a[i];
-                        flag = 1;
-                    }
+                    if (cnt % 2 && cnt != 0)
+                        ans++;
+                    cnt = 0;
+                    lastchar = a[i];
+                }
+            }
+            else
+            {
+                if (a[i] != '0')
+                {
+                    lastchar = a[i];
+                    flag = 1;
                 }
             }
         }
+        if (!flag)
+            ans = n;
         cout << ans el;
     }
     return 0;
