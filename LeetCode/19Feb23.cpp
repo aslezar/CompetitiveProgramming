@@ -37,12 +37,12 @@ public:
             vector<int> t;
             while (!lr.empty())
             {
-                if (lr.top()->right != nullptr)
+                if (lr.top()->right)
                 {
                     t.push_back(lr.top()->right->val);
                     rl.push(lr.top()->right);
                 }
-                if (lr.top()->left != nullptr)
+                if (lr.top()->left)
                 {
                     t.push_back(lr.top()->left->val);
                     rl.push(lr.top()->left);
@@ -56,12 +56,12 @@ public:
             }
             while (!rl.empty())
             {
-                if (rl.top()->left != nullptr)
+                if (rl.top()->left)
                 {
                     t.push_back(rl.top()->left->val);
                     lr.push(rl.top()->left);
                 }
-                if (rl.top()->right != nullptr)
+                if (rl.top()->right)
                 {
                     t.push_back(rl.top()->right->val);
                     lr.push(rl.top()->right);
