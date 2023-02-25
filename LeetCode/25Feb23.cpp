@@ -16,12 +16,8 @@ public:
         {
             if (prices[i] < buy)
                 buy = prices[i];
-            if (ans < prices[i] - buy)
-                ans = prices[i] - buy;
+            ans = max(ans, prices[i] - buy);
         }
-
-        if (ans < 0)
-            ans = 0;
         return ans;
     }
 };
