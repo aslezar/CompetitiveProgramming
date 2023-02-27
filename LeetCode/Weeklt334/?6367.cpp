@@ -13,33 +13,15 @@ public:
     int maxNumOfMarkedIndices(vector<int> &nums)
     {
         int ans = 0;
-        map<int, int> m;
-        for (auto &&i : nums)
+        sort(nums.begin(), nums.end());
+        for (int i = nums.size() - 1; i >= 0; i--)
         {
-            m[i]++;
+            
         }
-        // if(nums.size()==4 && nums[0]==3 && nums[3]==4)
-        //     return 2;
-        for (auto i = m.begin(); i != m.end(); i++)
+        
+        while (/* condition */)
         {
-            int temp = i->first * 2;
-            while (i->second)
-            {
-                i->second--;
-                while (m[temp] == 0 && temp <= m.end()->first)
-                {
-                    temp++;
-                }
-                if (temp == 0)
-                    break;
-                if (m[temp] != 0)
-                {
-                    ans += 2;
-                    m[temp]--;
-                }
-            }
-            if (temp == 0)
-                break;
+            binary_search(nums.begin(), nums.end());
         }
 
         return ans;
