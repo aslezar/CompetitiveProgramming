@@ -3,9 +3,6 @@
 #include <unordered_map>
 using namespace std;
 
-#define el << '\n'
-#define ws << ' '
-
 unordered_map<char, int> syb = {
     {'[', -1},
     {'{', -2},
@@ -29,8 +26,4 @@ bool isBalanced(string s)
         }
     }
     return s.empty();
-}
-int main()
-{
-    return 0;
 }

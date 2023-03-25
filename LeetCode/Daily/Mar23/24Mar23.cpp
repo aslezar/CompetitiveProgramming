@@ -16,14 +16,8 @@ public:
             if (v[abs(i)])
                 continue;
             if (i > 0)
-            {
                 ans++;
-                traversal(i, road, v, ans);
-            }
-            else
-            {
-                traversal(-i, road, v, ans);
-            }
+            traversal(abs(i), road, v, ans);
         }
     }
     int minReorder(int n, vector<vector<int>> &connections)
@@ -33,14 +27,6 @@ public:
         {
             road[i[0]].push_back(i[1]);
             road[i[1]].push_back(-i[0]);
-        }
-        for (auto &&i : road)
-        {
-            for (auto &&j : i)
-            {
-                cout << j ws;
-            }
-            cout el;
         }
         int ans = 0;
         vector<int> v(n, 0);

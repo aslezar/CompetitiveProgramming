@@ -33,6 +33,5 @@ int main()
     for (int i = 0; i < 6; i++)
         cout << ((ans[i] != -1) ? a[ans[i]] : -1) ws;
     cout el;
-
     return 0;
 }

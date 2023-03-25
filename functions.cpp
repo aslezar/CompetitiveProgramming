@@ -1,19 +1,6 @@
 #include <iostream>
 using namespace std;
 
-#define el << '\n'
-#define ws << ' '
-
-// Input function
-int input(int a = 0)
-{
-    cin >> a;
-    return a;
-}
-int mod(int a, int m)
-{
-    return (a % m + m) % m;
-}
 // For fast int read
 void fastscan(int &number)
 {
@@ -41,6 +28,22 @@ void fastscan(int &number)
 
     // if scanned input has a negative sign, negate the
     // value of the input number
+    if (negative)
+        number *= -1;
+}
+void fastscan(int &number)
+{
+    bool negative = false;
+    register int c;
+    number = 0;
+    c = getchar();
+    if (c == '-')
+    {
+        negative = true;
+        c = getchar();
+    }
+    for (; (c > 47 && c < 58); c = getchar())
+        number = number * 10 + c - 48;
     if (negative)
         number *= -1;
 }

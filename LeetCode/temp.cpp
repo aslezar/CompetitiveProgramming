@@ -1,59 +1,35 @@
-#include <iostream>
 #include <vector>
-
 using namespace std;
-
 class Solution
 {
 public:
-    void traversal(int root, vector<vector<int>> &road, vector<bool> &visited, int &ans)
+    void dfs(vector<vector<int>> &adj, vector<bool> &visited, int src, long long &nodes)
     {
-        visited[root] = true;
-        for (auto &&i : road[root])
-        {
-            if (visited[abs(i)])
-                continue;
-            if (i < 0)
-            {
-                ans++;
-                traversal(-i, road, visited, ans);
-            }
-            else
-            {
-                traversal(i, road, visited, ans);
-            }
-        }
+        visited[src] = true;
+        nodes++;
+        for (auto &&i : adj[src])
+            if (!visited[i])
+                dfs(adj, visited, i, nodes);
     }
-    int minReorder(int n, vector<vector<int>> &connections)
+    long long countPairs(int n, vector<vector<int>> &edges)
     {
-        vector<vector<int>> road(n);
-        for (auto &&i : connections)
+        vector<vector<int>> g(n);
+        for (auto &&i : edges)
         {
-            road[i[0]].push_back(i[1]);
-            road[i[1]].push_back(-i[0]);
+            g[i[0]].push_back(i[1]);
+            g[i[1]].push_back(i[0]);
         }
-        for (auto &&i : road)
+        long long ans = 0;
+        vector<bool> v(n, false);
+        for (int i = 0; i < n; i++)
         {
-            for (auto &&j : i)
+            long long nodes = 0;
+            if (!v[i])
             {
-                cout << j ws;
+                dfs(g, v, i, nodes);
+                ans += nodes * (n - nodes);
             }
-            cout el;
         }
-
-        int ans = 0;
-        vector<bool> visited(n, false);
-        traversal(0, road, visited, ans);
-        return ans;
+        return ans / 2;
     }
 };
-
-int main()
-{
-    Solution s;
-    vector<vector<int>> connections = {{0, 1}, {1, 3}, {2, 3}, {4, 0}, {4, 5}};
-    int n = 6;
-    int ans = s.minReorder(n, connections);
-    cout << ans << endl;
-    return 0;
-}
