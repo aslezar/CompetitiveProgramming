@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 #define el << '\n'
@@ -17,9 +18,7 @@ public:
         {
             presum += satisfaction[i];
             if (presum < 0)
-            {
                 break;
-            }
             res += presum;
         }
         return res;
