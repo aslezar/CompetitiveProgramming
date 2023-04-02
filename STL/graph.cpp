@@ -14,7 +14,7 @@ void input(const int n, const vector<vector<int>> &edges)
 void dfs(vector<vector<int>> &adj, vector<bool> &visited, int src)
 {
     visited[src] = true;
-    for (auto it = adj[src].end(); it != adj[src].end(); ++it)
+    for (auto it = adj[src].begin(); it != adj[src].end(); ++it)
         if (!visited[*it])
             dfs(adj, visited, *it);
 }
@@ -33,7 +33,7 @@ void dfs(vector<vector<int>> &adj, vector<bool> &visited, int src)
     //     }
     // }
     visited[src] = true;
-    for (auto it = adj[src].end(); it != adj[src].end(); ++it)
+    for (auto it = adj[src].begin(); it != adj[src].end(); ++it)
         if (!visited[*it])
             dfs(adj, visited, *it);
 }
