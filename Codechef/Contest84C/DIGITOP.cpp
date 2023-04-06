@@ -35,9 +35,8 @@ int main()
             cin >> temp;
             b.push_back(temp);
         }
-
-        map<char, int> replace;
         bool flag = 0;
+        map<int, int> m;
         for (size_t i = 0; i < n; i++)
         {
             if (a[i].size() != b[i].size())
@@ -45,35 +44,29 @@ int main()
                 flag = 1;
                 break;
             }
-            vector<int> extra;
             for (size_t j = 0; j < a[i].size(); j++)
             {
                 if (a[i][j] != b[i][j])
                 {
-                    if (replace[b[i][j]].second != i + 1)
-                    {
-                        replace[a[i][j]].first++;
-                        replace[b[i][j]].first--;
-                    }
-                    else
-                    {
-                        replace
-                    }
+                    m[a[i][j]]++;
+                    m[b[i][j]]--;
                 }
             }
         }
         if (flag)
         {
-            cout << "no" el;
+            cout << "NO" el;
             continue;
         }
         ll ans = 0;
-        for (auto &&i : no)
+        for (auto &&i : m)
         {
-            if (i.second != 0)
+            if (i.second > 0)
+            {
                 ans++;
+            }
         }
-        cout << ans;
+
         cout << ((ans <= k) ? "yes" : "no") el;
     }
     return 0;

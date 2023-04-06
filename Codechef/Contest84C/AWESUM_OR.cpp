@@ -4,6 +4,7 @@
 #include <math.h>
 #include <algorithm>
 #include <map>
+#include <climits>
 using namespace std;
 
 #define ll long long
@@ -12,14 +13,11 @@ using namespace std;
 
 const unsigned int mod = 1e9 + 7;
 const int maxn = 1e5 + 4;
-
-int power(int a, int b)
+long long power(int b, int e)
 {
-    int ans;
-    for (size_t i = 0; i < a; i++)
-    {
-        ans = (ans * b) % mod;
-    }
+    long long ans = 1;
+    while (e--)
+        ans = ((ans * b) % mod);
     return ans;
 }
 int main()
@@ -31,20 +29,16 @@ int main()
     {
         ll n = 0;
         cin >> n;
-        int ans = 0;
-        int on = (int)log2(n) + 1;
-        if (on < 3)
+        int on = 0;
+        while (n)
         {
-            cout << 0 el;
+            on += n & 1;
+            n >>= 1;
         }
-        else
-        {
-            for (int i = 1; i <= n - 3; i++)
-                ans = (ans * i) % mod; // compute (n-3)!
-
-            ans = (ans * (power(2, n) - 2)) % mod; // multiply by (2^n - 2)
-            cout << ans;
-        }
+        ll ans = (power(3, on) % mod - ((3LL * power(2, on)) % mod) + 3LL) % mod;
+        // ll ans = (((power(3, on) % mod - (3 * (power(2, on) % mod - 1 + mod)) % mod + mod) % mod + mod) % mod);
+        // int a = (((mod - 3) * 1ll * power(2, on)) % mod + power(3, on) + 3) % mod;
+        cout << ans el;
     }
     return 0;
 }
