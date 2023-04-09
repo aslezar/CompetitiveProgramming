@@ -51,5 +51,7 @@ int main()
     for (int i = 0; i < 5; i++)
         print(v5[i]);
 
+    // v3.reserve(100);
+
     return 0;
 }
