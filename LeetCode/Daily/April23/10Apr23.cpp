@@ -3,6 +3,9 @@
 #include <unordered_map>
 using namespace std;
 
+#define el << '\n'
+#define ws << ' '
+
 class Solution
 {
 public:
@@ -10,24 +13,29 @@ public:
         {'[', -1},
         {'{', -2},
         {'(', -3},
-        {']', 1},
-        {'}', 2},
-        {')', 3},
+        {']', -1},
+        {'}', -2},
+        {')', -3},
     };
-    bool isValid(string str)
+    bool isValid(string s)
     {
         stack<char> s;
-        for (auto &&bracket : str)
+        for (auto &&bracket : s)
         {
             if (syb[bracket] < 0)
-                s.push((bracket));
+                s.push_back(bracket);
             else if (syb[bracket] > 0)
             {
-                if (s.empty() || syb[s.top()] + syb[bracket] != 0)
+                if (s.empty() || syb[s.front()] + syb[bracket] != 0)
                     return 0;
-                s.pop();
+                s.pop_back();
             }
         }
         return s.empty();
     }
 };
+int main()
+{
+
+    return 0;
+}
