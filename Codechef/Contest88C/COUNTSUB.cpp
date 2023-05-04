@@ -22,17 +22,13 @@ int main()
         ll n = 0;
         cin >> n;
         map<int, int> m;
+        ll ans = n * (n + 1) / 2;
         for (size_t i = 0; i < n; i++)
         {
             int temp = 0;
             cin >> temp;
             m[temp]++;
-        }
-        int ans = (n * (n - 1)) / 2;
-        for (auto &&i : m)
-        {
-            int temp = (i.second * (i.second - 1)) / 2;
-            ans = ans - temp;
+            ans = ans - m[temp];
         }
         cout << ans el;
     }
