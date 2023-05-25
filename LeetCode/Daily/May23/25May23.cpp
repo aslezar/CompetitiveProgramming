@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 #define el << '\n'
@@ -11,14 +12,17 @@ public:
     {
         vector<double> dp(n + 1);
         dp[0] = 1;
+        double s = k > 0 ? 1 : 0;
         for (int i = 1; i <= n; i++)
         {
-            for (int j = 1; j <= maxPts; j++)
+            dp[i] = s / maxPts;
+            if (i < k)
             {
-                if (i - j >= 0 && i - j < k)
-                {
-                    dp[i] += dp[i - j] / maxPts;
-                }
+                s += dp[i];
+            }
+            if (i - maxPts >= 0 && i - maxPts < k)
+            {
+                s -= dp[i - maxPts];
             }
         }
         return accumulate(dp.begin() + k, dp.end(), 0.0);
