@@ -1,0 +1,8 @@
+8
+hyderabad delhi 10 15
+hyderabad pune 24 60
+delhi kolkata 36 56
+pune kasi 4 90
+delhi chennai 16 100
+kasi manali 41 45
+chennai madhurai 8 20

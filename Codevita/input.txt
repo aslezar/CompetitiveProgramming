@@ -1,0 +1,6 @@
+6
+banglore mumbai 45 105
+mumbai indore 16 230
+banglore lucknow 45 190
+lucknow kochi 54 96
+lucknow patna 54 28
