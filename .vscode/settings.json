@@ -91,6 +91,9 @@
         "variant": "cpp",
         "cerrno": "cpp",
         "queue": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "__node_handle": "cpp",
+        "__split_buffer": "cpp",
+        "filesystem": "cpp"
     }
 }
