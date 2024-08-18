@@ -42,8 +42,25 @@
             }
         },
         {
+            "label": "Create input.txt",
+            "type": "shell",
+            "command": "touch",
+            "args": [
+                "${fileDirname}/input.txt"
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false,
+                "close": true
+            }
+        },
+        {
             "type": "cppbuild",
-            "label": "C/C++: g++ build active file costom",
+            "label": "C++: Build and Run active file",
             "command": "/bin/g++",
             "args": [
                 "-fdiagnostics-color=always",
@@ -56,7 +73,10 @@
                 "0<input.txt",
                 "&&",
                 "rm",
-                "${fileDirname}/${fileBasenameNoExtension}"                
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "dependsOn": [
+                "Create input.txt"
             ],
             "options": {
                 "cwd": "${fileDirname}"
