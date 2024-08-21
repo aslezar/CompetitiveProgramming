@@ -8,53 +8,29 @@ const int maxn = 1e5 + 4;
 class Soln
 {
 public:
-    vector<vector<int>> save;
-    vector<vector<int>> tree;
-    int edges;
+    vector<int> tree;
     int n;
 
     Soln(int n)
     {
-        this->save = vector<vector<int>>(n + 1, vector<int>(n + 1, -1));
-        this->tree = vector<vector<int>>(n + 1, vector<int>(n + 1, -1));
-        this->edges = 0;
         this->n = n;
+        this->tree.resize(n + 1);
     }
     void printAns()
     {
         cout << "!";
-        for (int i = 1; i <= n; i++)
+        for (int i = 2; i <= n; i++)
         {
-            for (int j = i + 1; j <= n; j++)
-            {
-                if (tree[i][j] == 1)
-                {
-                    cout << ' ' << i << ' ' << j << endl;
-                }
-            }
+            cout << ' ' << tree[i] << ' ' << i;
         }
+        cout << endl;
     }
     void link(int a, int b)
     {
-        assert(a > 0 && b > 0);
-        assert(a <= n && b <= n);
-        assert(a != b);
-        if (tree[a][b] == 1)
-            return;
-        tree[a][b] = 1;
-        tree[b][a] = 1;
-        edges++;
+        tree[a] = b;
     }
     int ask(int a, int b)
     {
-        int size = save.size();
-        assert(a != b);
-        assert(a > 0 && b > 0);
-        assert(a < size && b < size);
-
-        if (save[a][b] != -1)
-            return save[a][b];
-
         cout << "? " << a << ' ' << b << endl;
         int res;
         cin >> res;
@@ -62,54 +38,22 @@ public:
             exit(0);
         return res;
     }
-    void resolver(int left, int right)
-    {
-        if (edges == n - 1)
-            return;
-
-        int res = ask(left, right);
-        if (left == res || right == res)
-        {
-            link(left, right);
-            return;
-        }
-        int res2 = ask(right, left);
-        if (res == res2)
-        {
-            // odd length
-            resolver(left, res);
-            resolver(res, right);
-        }
-        else
-        {
-            // even length
-            link(res, res2);
-            if (edges == n - 1)
-                return;
-            resolver(left, res);
-            resolver(res2, right);
-        }
-    }
     void solve()
     {
-        for (int start = 1; start <= n; start++)
+        for (int i = 2; i <= n; i++)
         {
-            for (int i = i + 1; i <= n; i++)
+            int par = 1;
+            while (true)
             {
-                if (i == start)
-                    continue;
-                int res = ask(start, i);
-                resolver(start, i);
-                if (edges == n - 1)
-                {
-                    printAns();
-                    goto nextCase;
-                }
+                int res = ask(i, par);
+                if (res == i)
+                    break;
+                else
+                    par = res;
             }
-
-        nextCase:
-            return;
+            link(i, par);
         }
+        printAns();
     }
 };
 
@@ -123,8 +67,6 @@ int main()
     {
         int n = 0;
         cin >> n;
-        // vector<vector<int>> save(n + 1, vector<int>(n + 1, -1));
-        // vector<vector<int>> tree(n + 1, vector<int>(n + 1, -1));
         Soln soln(n);
         soln.solve();
     }
