@@ -4,46 +4,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "C++: g++ build the active file coustom",
-            "type": "shell",
-            "command": "g++",
-            "args": [
-                // "-std=c++11",
-                "-O2",
-                // "-Wall",
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
-            ],
-            "group": "build",
-            "presentation": {
-                "close": true,
-                "panel": "shared",
-                "reveal": "silent"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ]
-        },
-        {
-            "label": "Remove files custom",
-            "type": "shell",
-            "command": "rm ${fileDirname}/${fileBasenameNoExtension}",
-            "group": "build",
-            "presentation": {
-                "echo": true,
-                "reveal": "silent",
-                "focus": false,
-                "panel": "shared",
-                "showReuseMessage": true,
-                "clear": false,
-                "close": true
-            }
-        },
-        {
             "label": "Create input.txt",
             "type": "shell",
+            "group": "none",
             "command": "touch",
             "args": [
                 "${fileDirname}/input.txt"
@@ -59,20 +22,14 @@
             }
         },
         {
+            "label": "Build C++ File",
             "type": "cppbuild",
-            "label": "C++: Build and Run active file",
             "command": "/bin/g++",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}",
-                "&&",
-                "${fileDirname}/${fileBasenameNoExtension}",
-                "0<input.txt",
-                "&&",
-                "rm",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "dependsOn": [
@@ -86,6 +43,63 @@
             ],
             "group": "build",
             "detail": "compiler: /bin/g++"
-        }
+        },
+        {
+            "label": "Run C++ file",
+            "type": "shell",
+            "command": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [
+                "0<input.txt",
+                "&&",
+                "rm",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "dependsOn": [
+                "Build C++ File",
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "With input file",
+            "problemMatcher": []
+        },
+        {
+            "label": "Run C++ file(no input file)",
+            "type": "shell",
+            "command": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [
+                "&&",
+                "rm",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "dependsOn": [
+                "Build C++ File",
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "group": "build",
+            "detail": "No input file",
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "label": "Remove Executable",
+            "command": "rm ${fileDirname}/${fileBasenameNoExtension}",
+            "group": "none",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false,
+                "close": true
+            }
+        },
     ]
 }
