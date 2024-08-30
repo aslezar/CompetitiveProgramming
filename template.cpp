@@ -1,61 +1,45 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#ifndef ONLINE_JUDGE
+#include "debug.cpp"
+#else
+#define debug(...)
+#define debugArr(...)
+#endif
+
+// #define int long long
 #define ll long long
-const unsigned int mod = 1e9 + 7;
-const int maxn = 1e5 + 4;
+#define all(a) (a).begin(), (a).end()
+#define rall(a) (a).rbegin(), (a).rend()
+#define sorta(a) sort(all(a))
+#define sortd(a) sort(rall(a))
+#define set_bits __builtin_popcount
+#define gcd __gcd
 
-long long power_mod(long long base, long long exp, long long mod = mod)
-{
-    // this function multiplies a number by itself n times in O(logn)
-    long long result = 1;
-    while (exp > 0)
-    {
-        if (exp % 2 == 1)
-            result = (result * base) % mod;
-        base = (base * base) % mod;
-        exp = exp / 2;
-    }
-    return result;
-}
+constexpr unsigned int mod = 1e9 + 7;
+constexpr ll maxn = 1e5 + 4;
+constexpr float EPS = numeric_limits<float>::epsilon();
+constexpr ll INF = numeric_limits<ll>::max();
 
-struct custom_hash
-{
-    static uint64_t splitmix64(uint64_t x)
-    {
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const
-    {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
-// unordered_map<ll, int, custom_hash> safe_map;
-
-void solve()
+void solve([[maybe_unused]] ll &_case_no)
 {
     ll n = 0;
     cin >> n;
     cout << n << endl;
-
-    cout << power_mod(2, 1, mod) << endl;
 }
 
-int main()
+int32_t main()
 {
     // freopen("input.txt", "r", stdin);
     // freopen("output.txt", "w", stdout);
     ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(0);
     ll t = 1;
-    // cin >> t;
-    while (t--)
+    cin >> t;
+    for (ll i = 0; i < t; i++)
     {
-        solve();
+        // cout << "Case #" << i + 1 << ": ";
+        solve(i);
     }
     return 0;
 }

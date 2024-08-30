@@ -28,6 +28,9 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
+                "-Wall",
+                "-Wextra",
+                "-O2",
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
