@@ -17,3 +17,6 @@ Contest problems saved in respective folder name
 input.txt in leetcode is neccessary to remove exe file after executing it
 
 _ in front of contest solved file means solved after contest
+
+To make this path available for all future g++ invocations, you can set the CPLUS_INCLUDE_PATH environment variable:
+export CPLUS_INCLUDE_PATH=/path/to/headers:$CPLUS_INCLUDE_PATH

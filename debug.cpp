@@ -29,7 +29,7 @@ namespace __DEBUG_UTIL__
         int f = 0;
         cerr << '{';
         for (auto &&i : v)
-            cerr << (f++ ? "," : "") << (i ? "T" : "F");
+            cerr << (f++ ? ", " : "") << (i ? "T" : "F");
         cerr << "}";
     }
     /* Templates Declarations to support nested datatypes */
@@ -60,10 +60,10 @@ namespace __DEBUG_UTIL__
         /*  This works for every container that supports range-based loop
             i.e. vector, set, map, oset, omap, dequeue */
         int f = 0;
-        cerr << '{';
+        cerr << "{ ";
         for (auto &&i : x)
-            cerr << (f++ ? "," : ""), print(i);
-        cerr << "}";
+            cerr << (f++ ? ", " : ""), print(i);
+        cerr << " }";
     }
     template <typename T>
     void print(vector<vector<T>> mat)
@@ -102,7 +102,7 @@ namespace __DEBUG_UTIL__
         static void printTuple(T t)
         {
             Tuple<T, N - 1>::printTuple(t);
-            cerr << ",", print(get<N - 1>(t));
+            cerr << ", ", print(get<N - 1>(t));
         }
     };
     template <typename T>
@@ -123,7 +123,7 @@ namespace __DEBUG_UTIL__
         int f = 0;
         cerr << '{';
         while (!pq.empty())
-            cerr << (f++ ? "," : ""), print(pq.top()), pq.pop();
+            cerr << (f++ ? ", " : ""), print(pq.top()), pq.pop();
         cerr << "}";
     }
     template <typename T>
@@ -132,7 +132,7 @@ namespace __DEBUG_UTIL__
         int f = 0;
         cerr << '{';
         while (!st.empty())
-            cerr << (f++ ? "," : ""), print(st.top()), st.pop();
+            cerr << (f++ ? ", " : ""), print(st.top()), st.pop();
         cerr << "}";
     }
     template <typename T>
@@ -141,7 +141,7 @@ namespace __DEBUG_UTIL__
         int f = 0;
         cerr << '{';
         while (!q.empty())
-            cerr << (f++ ? "," : ""), print(q.front()), q.pop();
+            cerr << (f++ ? ", " : ""), print(q.front()), q.pop();
         cerr << "}";
     }
     /* Printer functions */
@@ -156,12 +156,16 @@ namespace __DEBUG_UTIL__
                 bracket++;
             else if (names[i] == ')' or names[i] == '>' or names[i] == '}')
                 bracket--;
-        cerr.write(names, i) << " = ";
+        cerr << '[';
+        string name(names, i);
+        name.erase(std::remove(name.begin(), name.end(), ' '), name.end());
+        cerr << name << "] = ";
+        // cerr.write(names, i) << "] = ";
         print(head);
         if (sizeof...(tail))
-            cerr << " ||", printer(names + i + 1, tail...);
+            cerr << " || ", printer(names + i + 1, tail...);
         else
-            cerr << "]\n";
+            cerr << "\n";
     }
     /* PrinterArr */
     void printerArr(const char *) {} /* Base Recursive */
@@ -184,6 +188,95 @@ namespace __DEBUG_UTIL__
     }
 }
 
-#define debug(...) std::cerr << __LINE__ << ": [", __DEBUG_UTIL__::printer(#__VA_ARGS__, __VA_ARGS__)
+#define debug(...) std::cerr << __LINE__ << ": ", __DEBUG_UTIL__::printer(#__VA_ARGS__, __VA_ARGS__)
 #define debugArr(...) std::cerr << __LINE__ << ": [", __DEBUG_UTIL__::printerArr(#__VA_ARGS__, __VA_ARGS__)
 #endif
+
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// int main()
+// {
+//     // int, char, bool, long long int
+//     // pair, tuple, vector, set, oset, map, omap, stack, queue, priority_queue, bitset
+//     // int arr[], bool arr[], vector<int> adj[]
+//     // int dp[100][200], vector<vector<bool>> vis(100, vector<bool> (200, 0))
+//     // map<string, vector<pair<char, unordered_set<long long>>>> WHATTT;
+
+//     int a = 10;
+//     debug(a);
+
+//     char c = 'a';
+//     debug(c);
+
+//     bool b = true;
+//     debug(b);
+
+//     long long int l = 1000000000000000000;
+//     debug(l);
+
+//     pair<int, char> p = {1, 'a'};
+//     debug(p);
+
+//     tuple<int, char, bool> t = {1, 'a', true};
+//     debug(t);
+
+//     vector<int> v = {1, 2, 3, 4, 5};
+//     debug(v);
+
+//     set<int> s = {1, 2, 3, 4, 5};
+//     debug(s);
+
+//     stack<int> st;
+//     st.push(1);
+//     st.push(2);
+//     st.push(3);
+//     debug(st);
+
+//     queue<int> q;
+//     q.push(1);
+//     q.push(2);
+//     q.push(3);
+//     debug(q);
+
+//     priority_queue<int> pq;
+//     pq.push(1);
+//     pq.push(2);
+//     pq.push(3);
+//     debug(pq);
+
+//     bitset<5> bit(5);
+//     bit[1] = 1;
+//     bit[3] = 1;
+//     debug(bit);
+
+//     int arr[] = {1, 2, 3, 4, 5};
+//     debug(arr);
+
+//     bool barr[] = {1, 0, 1, 0, 1};
+//     debug(barr);
+
+//     vector<int> adj[5];
+//     adj[0].push_back(1);
+//     adj[0].push_back(2);
+//     adj[1].push_back(3);
+//     adj[2].push_back(4);
+//     debug(adj);
+
+//     int dp[5][5];
+//     memset(dp, 0, sizeof(dp));
+//     debug(dp);
+
+//     vector<vector<bool>> vis(5, vector<bool>(5, 0));
+//     debug(vis);
+
+//     map<string, vector<pair<char, unordered_set<long long>>>> m;
+//     m["hello"].push_back({'a', {1, 2, 3}});
+//     m["world"].push_back({'b', {4, 5, 6}});
+//     debug(m);
+
+//     debug(a, c, b, l, p, t, v, s, st, q, pq, bit, arr, barr, m);
+//     debug(a, c, b, l);
+
+//     return 0;
+// }
