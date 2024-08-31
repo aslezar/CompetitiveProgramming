@@ -22,92 +22,29 @@ constexpr ll maxn = 1e5 + 4;
 constexpr float EPS = numeric_limits<float>::epsilon();
 constexpr ll INF = numeric_limits<ll>::max();
 
-void helper(set<ll> &s, ll &ans, ll a, ll b, vector<ll> &v)
-{
-    ll mn = *s.begin();
-    ll mx = *s.rbegin();
-
-    // remove mn and mx
-    s.erase(mn);
-    s.erase(mx);
-
-    vector<pair<ll, ll>> arr;
-    for (ll i = 0; i < v.size(); i++)
-    {
-        for (ll j = 0; j < v.size(); j++)
-        {
-            arr.push_back({mn + v[i], mx + v[j]});
-        }
-    }
-
-    // range and index
-    vector<pair<ll, ll>> minFoundAt;
-
-    for (size_t i = 0; i < arr.size(); i++)
-    {
-        bool isArrIFirstExists = !s.insert(arr[i].first).second;
-        bool isArrISecondExists = !s.insert(arr[i].second).second;
-
-        ll range = *s.rbegin() - *s.begin();
-        // debug(arr[i].first, arr[i].second, range);
-        if (range < ans)
-        {
-            minFoundAt.push_back({range, i});
-        }
-        if (isArrIFirstExists == false)
-            s.erase(arr[i].first);
-        if (isArrISecondExists == false)
-            s.erase(arr[i].second);
-    }
-
-    if (minFoundAt.empty())
-        return;
-
-    auto minValueAt = *min_element(minFoundAt.begin(), minFoundAt.end());
-    ans = min(ans, minValueAt.first);
-    // debug(s);
-
-    for (size_t i = 0; i < minFoundAt.size(); i++)
-    {
-        if (minFoundAt[i].first == minValueAt.first)
-        {
-            bool isArrIFirstExists = !s.insert(arr[minValueAt.second].first).second;
-            bool isArrISecondExists = !s.insert(arr[minValueAt.second].second).second;
-            helper(s, ans, a, b, v);
-            if (isArrIFirstExists == false)
-                s.erase(arr[minValueAt.second].first);
-            if (isArrISecondExists == false)
-                s.erase(arr[minValueAt.second].second);
-        }
-    }
-}
-
 void solve([[maybe_unused]] ll &_case_no)
 {
     ll n, a, b;
     cin >> n >> a >> b;
 
-    set<ll> s;
+    ll g = gcd(a, b);
 
-    ll val = 0;
+    vector<ll> s(n);
+
     for (ll i = 0; i < n; i++)
     {
-        cin >> val;
-        s.insert(val);
+        cin >> s[i];
+        s[i] %= g;
     }
+    sorta(s);
 
-    if (abs(a - b) == 1)
+    ll ans = s[n - 1] - s[0];
+
+    for (int i = 1; i < n; i++)
     {
-        cout << 0 << endl;
-        return;
+        ll temp = (s[(i - 1 + n) % n] + g) - s[i];
+        ans = min(ans, temp);
     }
-    if (a > b)
-        swap(a, b);
-
-    vector<ll> v = {0, a, b};
-
-    ll ans = *s.rbegin() - *s.begin();
-    helper(s, ans, a, b, v);
 
     cout << ans << endl;
 }
