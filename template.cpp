@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// bitmask
-// pnc
+// bitmask:https://leetcode.com/problems/select-cells-in-grid-with-maximum-score/description/
+// pnc:https://leetcode.com/problems/maximum-xor-score-subarray-queries/description/
 
 #ifdef LOCAL_RUN
 #include "debug.cpp"
