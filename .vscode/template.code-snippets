@@ -119,7 +119,7 @@
             "{",
             "    Solution s;",
             "",
-            "    cout << s.checkTwoChessboards(\"a1\", \"b2\") << endl;",
+            "    // cout << s.checkTwoChessboards(\"a1\", \"b2\") << endl;",
             "    cout << endl;",
             "",
             "    return 0;",
