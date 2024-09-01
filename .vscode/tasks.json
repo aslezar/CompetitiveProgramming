@@ -28,6 +28,8 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
+                "-Wall",
+                "-O2",
                 "-I${workspaceFolder}",
                 "-DLOCAL_RUN",
                 "${file}",

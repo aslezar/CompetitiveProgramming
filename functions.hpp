@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// __int128_t
+
 long long GCD(long long a, long long b)
 {
     while (b)
