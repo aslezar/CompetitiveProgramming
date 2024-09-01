@@ -1,8 +1,9 @@
+#ifdef LOCAL_RUN
+
 #include <bits/stdc++.h>
 using namespace std;
-
-#ifdef LOCAL_RUN
 #include "debug.cpp"
+
 #else
 #define debug(...)
 #define debugArr(...)
@@ -22,25 +23,27 @@ constexpr ll maxn = 1e5 + 4;
 constexpr float EPS = numeric_limits<float>::epsilon();
 constexpr ll INF = numeric_limits<ll>::max();
 
-void solve([[maybe_unused]] ll &_case_no)
+class Solution
 {
-    ll n = 0;
-    cin >> n;
-    cout << n << endl;
-    debug(n);
-}
-
-int32_t main()
-{
-    // freopen("input.txt", "r", stdin);
-    // freopen("output.txt", "w", stdout);
-    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(0);
-    ll t = 1;
-    cin >> t;
-    for (ll i = 0; i < t; i++)
+public:
+    bool checkTwoChessboards(string coordinate1, string coordinate2)
     {
-        // cout << "Case #" << i + 1 << ": ";
-        solve(i);
+        return abs((coordinate1[0] - 'a' + coordinate1[1]) - (coordinate2[0] - 'a' + coordinate2[1])) % 2 == 0;
     }
+};
+
+#undef int
+
+#ifdef LOCAL_RUN
+
+int main()
+{
+    Solution s;
+
+    cout << s.checkTwoChessboards("a1", "b2") << endl;
+    cout << endl;
+
     return 0;
 }
+
+#endif
