@@ -34,51 +34,52 @@ constexpr ll INF = numeric_limits<ll>::max();
 
 void solve([[maybe_unused]] ll &_case_no)
 {
-    ll n = 0, k = 0;
-    cin >> n >> k;
+    ll n = 0, q = 0;
+    cin >> n >> q;
     vi v(n);
-    ll g = 0;
-    FOR(i, 0, n - 1)
+    vi c(n + 1);
+    FOR(i, 1, n)
     {
-        cin >> v[i];
-        g = gcd(g, v[i]);
+        cin >> v[i - 1];
+        c[v[i - 1]]++;
     }
-    if (n == 1)
+    // debug(c);
+    FOR(i, 1, n)
     {
-        ll &num = v[0];
-        if (num < k)
-        {
-            cout << k << endl;
-        }
-        else
-        {
-            cout << k - 1 << endl;
-        }
-        return;
+        c[i] += c[i - 1];
     }
-    if (g != 1)
+    // debug(c);
+    vi ans(n + 1);
+    FOR(x, 1, n)
     {
-        ll q = 0;
-        for (auto &i : v)
+        ll l = 0, r = x;
+        while (l < r)
         {
-            i = q;
-            q += g;
-        }
-        long long lst = v[0];
-        for (int i = 1; i < n; i++)
-        {
-            if (k + lst < v[i])
+            ll m = l + (r - l) / 2;
+            ll cnt = c[m];
+            for (ll k = 1; k * x <= n; k++)
             {
-                cout << k + lst << endl;
-                return;
+                cnt += (c[min(k * x + m, n)] - c[k * x - 1]);
             }
-            k -= (v[i] - lst - 1);
-            lst = v[i];
+            if (cnt >= n / 2 + 1)
+            {
+                r = m;
+            }
+            else
+            {
+                l = m + 1;
+            }
         }
-        cout << k + lst << endl;
-        return;
+        ans[x] = l;
     }
-    cout << n + k - 1 << endl;
+    FOR(qq, 1, q)
+    {
+        ll x;
+        cin >> x;
+
+        cout << ans[x] << " ";
+    }
+    cout << endl;
 }
 
 int32_t main()
