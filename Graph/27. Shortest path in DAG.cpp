@@ -36,9 +36,76 @@ constexpr ll INF = numeric_limits<ll>::max();
 class Solution
 {
 public:
-    bool checkTwoChessboards(string coordinate1, string coordinate2)
+    vector<int> shortestPath(int N, int M, vector<vector<int>> &edges)
     {
-        return abs((coordinate1[0] - 'a' + coordinate1[1]) - (coordinate2[0] - 'a' + coordinate2[1])) % 2 == 0;
+
+        vector<vector<pair<int, int>>> adj(N);
+
+        for (int i = 0; i < edges.size(); i++)
+        {
+            int &u = edges[i][0];
+            int &v = edges[i][1];
+            int &w = edges[i][2];
+
+            adj[u].push_back({v, w});
+        }
+
+        vector<int> in(N);
+        for (int i = 0; i < N; i++)
+        {
+            for (auto &node : adj[i])
+            {
+                in[node.first]++;
+            }
+        }
+
+        queue<int> q;
+        for (int i = 0; i < N; i++)
+        {
+            if (in[i] == 0)
+            {
+                q.push(i);
+            }
+        }
+
+        vector<int> topo;
+
+        while (!q.empty())
+        {
+            auto front = q.front();
+            q.pop();
+            topo.push_back(front);
+
+            for (auto &i : adj[front])
+            {
+                in[i.first]--;
+                if (in[i.first] == 0)
+                {
+                    q.push(i.first);
+                }
+            }
+        }
+        reverse(topo.begin(), topo.end());
+
+        vector<int> dist(N, 1e9);
+        dist[0] = 0;
+
+        while (!topo.empty())
+        {
+            auto top = topo.back();
+            topo.pop_back();
+
+            for (auto &i : adj[top])
+            {
+                dist[i.first] = min(dist[i.first], dist[top] + i.second);
+            }
+        }
+
+        for (auto &i : dist)
+            if (i == 1e9)
+                i = -1;
+
+        return dist;
     }
 };
 
