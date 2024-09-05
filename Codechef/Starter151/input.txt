@@ -1,0 +1,16 @@
+4
+8 3
+abcdefgh
+aabbbccd
+3 2
+abc
+abc
+3 2
+abc
+abd
+4 4
+opqk
+cccc
+4 2
+abcd
+ppqq
