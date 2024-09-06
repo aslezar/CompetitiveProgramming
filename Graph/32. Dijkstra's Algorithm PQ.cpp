@@ -41,7 +41,7 @@ public:
     vector<int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
         // T.C. E*log(V)
-        
+
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
         vector<int> dist(V, INT_MAX);
 
@@ -54,6 +54,9 @@ public:
             int distance = top.first;
             int node = top.second;
             pq.pop();
+
+            if (dist[node] < distance)
+                continue;
 
             for (auto &it : adj[node])
             {
