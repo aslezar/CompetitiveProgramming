@@ -41,7 +41,19 @@ void solve([[maybe_unused]] ll &_case_no)
     cin >> q;
 
     vi v(n);
-    input(v, n);
+    vi d(n);
+
+    for (int i = 0; i < n; i++)
+    {
+        cin >> v[i];
+    }
+
+    debug(v);
+    for (int i = 1; i < n; i++)
+    {
+        d[i] = d[i - 1] + abs(v[i] - v[i - 1]);
+    }
+    debug(d);
 
     for (int qq = 0; qq < q; qq++)
     {
@@ -49,14 +61,43 @@ void solve([[maybe_unused]] ll &_case_no)
         cin >> l >> r >> k;
         l--;
         r--;
-        ll diff = 0;
-        // debug(l,r,k);
-        for (int i = l; i < r; i++)
+        ll diff = d[r] - d[l];
+
+        if (diff <= k)
         {
-            diff += (abs(v[i] - v[i + 1]));
+            cout << "0\n";
+            continue;
         }
-        // debug(diff);
-        cout << (diff > k ? diff - k : 0) << '\n';
+
+        ll sortDiff = abs(v[r] - v[l]);
+        ll ans = 0;
+
+        assert((diff - sortDiff) % 2 == 0);
+        // if (k < sortDiff)
+        // {
+        //     ans += (diff - sortDiff) / 2;
+        //     ans += (sortDiff - k);
+        // }
+        // else
+        // {
+        //     ans += (diff - k + 1) / 2;
+        // }
+        if (k >= sortDiff)
+        {
+            ll diffBetweenSortedAndUnSorted = diff - k;
+            ans = (diffBetweenSortedAndUnSorted) / 2;
+            ans += (diffBetweenSortedAndUnSorted & 1);
+        }
+        // else if (k == sortDiff)
+        // {
+        //     ans = (diff - sortDiff) / 2;
+        // }
+        else
+        {
+            ans = (diff - sortDiff) / 2;
+            ans += (sortDiff - k) / 1;
+        }
+        cout << ans << endl;
     }
 }
 
