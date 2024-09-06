@@ -2,6 +2,8 @@
 using namespace std;
 
 // __int128_t
+// constexpr float EPS = numeric_limits<float>::epsilon();
+// constexpr ll INF = numeric_limits<ll>::max();
 
 long long GCD(long long a, long long b)
 {

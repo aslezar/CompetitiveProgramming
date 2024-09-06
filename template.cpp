@@ -31,9 +31,6 @@ typedef pair<int, int> pii;
 typedef vector<vector<int>> vvi;
 
 constexpr unsigned int mod = 1e9 + 7;
-constexpr unsigned int maxn = 1e5 + 4;
-constexpr float EPS = numeric_limits<float>::epsilon();
-constexpr ll INF = numeric_limits<ll>::max();
 
 void solve([[maybe_unused]] ll &_case_no)
 {
