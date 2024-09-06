@@ -1,7 +1,4 @@
 4
-8 3
-abcdefgh
-aabbbccd
 3 2
 abc
 abc

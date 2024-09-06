@@ -77,6 +77,35 @@ public:
     }
 };
 
+class Solution2
+{
+public:
+    vector<int> numberOfWays(int n, vector<int> &hunger, int m, vector<int> &calories)
+    {
+
+        sorta(calories);
+
+        int maxHunger = *max_element(all(hunger));
+        vector<int> dp(maxHunger + 1, 0);
+        dp[0] = 1;
+
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = calories[i]; j <= maxHunger; j++)
+            {
+                dp[j] = (dp[j] - dp[j - calories[i]]) % mod;
+            }
+        }
+
+        vector<int> ans;
+        for (int i = 0; i < n; i++)
+        {
+            ans.push_back(dp[hunger[i]]);
+        }
+        return ans;
+    }
+};
+
 #undef int
 
 #ifdef LOCAL_RUN

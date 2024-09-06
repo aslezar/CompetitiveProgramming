@@ -51,39 +51,24 @@ void solve([[maybe_unused]] ll &_case_no)
 
     vector<pair<int, char>> steps;
 
-    int l = 0, r = 0;
-    unordered_map<char, int> f;
-    for (int i = 0; i < k; i++)
+    int l = -1, r = -1;
+    debug(s2);
+    for (int c = 'a'; c <= 'z'; c++)
     {
-        f[s2[i]]++;
-    }
-    if (f[s2[0]] == k)
-    {
-        // Substr found;
-        l = 0, r = k;
-    }
-    else
-    {
-        for (int i = k; i < n; i++)
+        ll t = s2.find(string(k, c));
+        if (t != -1)
         {
-            f[s2[i]]++;
-            f[s2[i - k]]--;
-            if (f[s2[i]] == k)
-            {
-                l = i - k + 1, r = i + 1;
-                // while (r < n && s2[r - 1] == s2[r])
-                // {
-                //     r++;
-                // }
-                break;
-            }
-        }
-        if (r - l < k)
-        {
-            cout << "-1" << '\n';
-            return;
+            l = t;
+            r = t + k;
+            break;
         }
     }
+    if (l == -1)
+    {
+        cout << "-1\n";
+        return;
+    }
+
     debug(l, r);
     // assert(r - l >= k);
 
