@@ -1,21 +1,24 @@
 /*
-    Tarjan's Algorithm
-    It is used to find the bridges in a graph
-    A bridge is an edge that if removed, increases the number of connected components in the graph
+    Articulation Point in Graph
+    A node is a articulation point if removing it will increase the number of connected components
 
     we traverse the graph using dfs
-    keep a track of their time of insertion and lowest time of insertion it can get from all its adjacent nodes except parent node
+    maintaing two arrays tin and low
+    tin: store the time of insertion of a node
+    low: store the lowest time of insertion it can get from all its adjacent nodes except parent node
+    if adj node is not visited then we take it low value
+    if adj node is visited then we take it tin value
 
-    parent always try to get the lowest time of insertion it can get from its children except parent
-    after competing dfs parent checks if it can get a lower time of insertion from its children
+    if low[i] >= tin[node] then node is a articulation point since it means we can not reach any node which has lower time of insertion than node
 
-    it then check if the lowest time of insertion of its children is greater than its own time of insertion
-    if yes then it is a bridge since it is the only way to reach that node
+    Edge Cases:
+    it will not work for root node
+    for root node we need to check if it has more than 1 child
+    if it has more than 1 child then it is a articulation point
 
     Time Complexity: O(V+E)
     Space Complexity: O(3*(V+E))
     For undirected graph
-
 */
 
 #ifdef LOCAL_RUN

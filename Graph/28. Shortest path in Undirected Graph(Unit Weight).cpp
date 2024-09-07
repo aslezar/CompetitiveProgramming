@@ -1,3 +1,15 @@
+/*
+    Shortest path in Undirected Graph(Unit Weight)
+    to reach a node from another node in a graph with unit weight edges
+
+    we can use bfs to find the shortest path
+    we keep a distance array with distance of src node as 0 and all other nodes as infinity
+    we traverse the graph using bfs and if we find a lesser distance to reach a node then we update the distance and push the node in the queue
+
+    since we are traversing the array level by level it means the distance will be minimum
+
+*/
+
 #ifdef LOCAL_RUN
 
 #include <bits/stdc++.h>

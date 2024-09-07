@@ -1,3 +1,14 @@
+/*
+    Floyd Warshall Algorithm
+    It is used to find the shortest path for all nodes to all nodes
+
+    we traverse all nodes and try to get to other nodes via the current node
+    it is brute force approach
+
+    Time Complexity: O(N^3)
+    Space Complexity: O(N^2)
+*/
+
 #ifdef LOCAL_RUN
 
 #include <bits/stdc++.h>

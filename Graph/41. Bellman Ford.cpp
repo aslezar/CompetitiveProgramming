@@ -1,3 +1,20 @@
+/*
+    Bellman Ford
+    It is used to find the shortest path for all nodes from source nodes
+    it also detects negative cycle
+
+    we relax all edges N-1 times
+    relax means we try to minimize the distance of the node
+
+    n-1 times because in worst case the shortest path will be n-1 edges
+    //for exampel 1->2->3->4->5
+
+    to detech a negative cycle we relax all edges one more time
+    if we are able to relax any edge then it means there is a negative cycle
+    beacuse a nodes can be reach to another node in max n-1 edges
+
+*/
+
 #ifdef LOCAL_RUN
 
 #include <bits/stdc++.h>

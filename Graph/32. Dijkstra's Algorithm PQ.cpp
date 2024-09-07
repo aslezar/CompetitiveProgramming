@@ -1,3 +1,17 @@
+/*
+    Djikstra's Algorithm
+    It is used to find the shortest path for all nodes to all nodes
+    It can not be used for graph having negative weight edges
+    It is greedy algorithm
+    It uses priority queue to get the minimum distance node
+
+    we start from the source node
+    if we find a adj node from current node that can be reach in less distance
+    then we update the distance of the adj node and push the adj node in the priority queue for further processing
+
+    // Time Complexity: O(E*log(V))
+*/
+
 #ifdef LOCAL_RUN
 
 #include <bits/stdc++.h>
