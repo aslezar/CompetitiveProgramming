@@ -1,3 +1,20 @@
+/*
+    Prim's Algorithm
+    We have to find the MST of the graph
+
+    To find the mst we start from a node
+    we add the node to our mst
+    we then add all the edges of the node to a priority queue
+    if the edge is already a part of mst we discard it
+    else we add the edge to our mst
+
+    since we are using priority queue we are sure that the edge we are adding is the minimum edge that connects the mst to the rest of the graph
+
+    T.C. E*logE
+*/
+
+// MST is for weighted, connected and undirected graph
+
 #ifdef LOCAL_RUN
 
 #include <bits/stdc++.h>
@@ -8,27 +25,6 @@ using namespace std;
 #define debug(...)
 #define debugArr(...)
 #endif
-
-#define int long long
-#define all(a) (a).begin(), (a).end()
-#define rall(a) (a).rbegin(), (a).rend()
-#define sorta(a) sort(all(a))
-#define sortd(a) sort(rall(a))
-#define set_bits __builtin_popcount
-
-#define F first
-#define S second
-#define PB push_back
-#define gcd __gcd
-#define FOR(i, a, b) for (int i = a; i <= b; i++)
-#define input(vec, n) FOR(i, 0, n - 1) std::cin >> vec[i];
-
-typedef long long ll;
-typedef vector<int> vi;
-typedef pair<int, int> pii;
-typedef vector<vector<int>> vvi;
-
-constexpr unsigned int mod = 1e9 + 7;
 
 class Solution
 {

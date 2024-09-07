@@ -1,3 +1,19 @@
+/*
+    Dis Joint Set
+    Helps to identify if two nodes are part of same component in O(1)
+    we save the ultimate parent of each node
+    if two nodes have same ultimate parent then they are part of same component
+
+    to connect two nodes
+    we find the ultimate parent of both nodes
+    if they are same then they are already connected
+    else we connect them by making one of them parent of other
+
+    We can connect two nodes by rank or by size
+    By Rank: We connect the node with lower rank to the node with higher rank
+    By Size: We connect the node with lower size to the node with higher size
+*/
+
 #ifdef LOCAL_RUN
 
 #include <bits/stdc++.h>
@@ -8,27 +24,6 @@ using namespace std;
 #define debug(...)
 #define debugArr(...)
 #endif
-
-#define int long long
-#define all(a) (a).begin(), (a).end()
-#define rall(a) (a).rbegin(), (a).rend()
-#define sorta(a) sort(all(a))
-#define sortd(a) sort(rall(a))
-#define set_bits __builtin_popcount
-
-#define F first
-#define S second
-#define PB push_back
-#define gcd __gcd
-#define FOR(i, a, b) for (int i = a; i <= b; i++)
-#define input(vec, n) FOR(i, 0, n - 1) std::cin >> vec[i];
-
-typedef long long ll;
-typedef vector<int> vi;
-typedef pair<int, int> pii;
-typedef vector<vector<int>> vvi;
-
-constexpr unsigned int mod = 1e9 + 7;
 
 class DisjointSet
 {
@@ -54,6 +49,7 @@ public:
         }
         return parent[u] = findUltimateParent(parent[u]);
     }
+    // T.C. O(4*alpha) = O(1) alpha is the inverse ackermann function
     void unionByRank(int u, int v)
     {
         int p_u = findUltimateParent(u);
