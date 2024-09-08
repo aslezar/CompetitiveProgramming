@@ -80,7 +80,7 @@ public:
         {
             // join u to v
             parent[p_u] = p_v;
-            size[p_v] += size[p_v];
+            size[p_v] += size[p_u];
         }
         else
         {
