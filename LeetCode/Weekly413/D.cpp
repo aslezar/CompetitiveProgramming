@@ -36,35 +36,37 @@ constexpr ll INF = numeric_limits<ll>::max();
 class Solution
 {
 public:
-    vector<int> maximumSubarrayXor(vector<int> &nums, vector<vector<int>> &queries)
+    vector<int> maximumSubarrayXor(vector<int> &nums,
+                                   vector<vector<int>> &queries)
     {
         int n = nums.size();
-        vector<vector<int>> dp2(n, vector<int>(n));
-        for (int i = 0; i < n; i++)
-        {
-            dp2[i][i] = nums[i];
-            for (int j = i + 1; j < n; j++)
-            {
-                dp2[i][j] = dp2[i][j - 1] ^ nums[j];
-            }
-        }
-        debug(dp2);
-
-        vector<vector<int>> dp(n, vector<int>(n));
-        for (int i = 0; i < n; i++)
-            dp[i][i] = nums[i];
+        vector<vector<int>> dp(n + 1, vector<int>(n, 0));
+        dp[1] = nums;
 
         for (int len = 2; len <= n; len++)
         {
-            for (int st = 0; st + len - 1 < n; st++)
+            for (int start = 0; start <= n - len; start++)
             {
-                int end = st + len - 1;
-                dp[st][end] = dp[st][end - 1] ^ dp[st + 1][end];
+                dp[len][start] = (dp[len - 1][start] ^ dp[len - 1][start + 1]);
             }
         }
         debug(dp);
 
-        return {};
+        for (int len = 2; len <= n; len++)
+        {
+            for (int start = 0; start <= n - len; start++)
+            {
+                dp[len][start] = max({dp[len][start], dp[len - 1][start], dp[len - 1][start + 1]});
+            }
+        }
+        debug(dp);
+        vector<int> ans;
+        for (auto &q : queries)
+        {
+            int l = q[0], r = q[1];
+            ans.push_back(dp[r - l + 1][l]);
+        }
+        return ans;
     }
 };
 

@@ -11,7 +11,6 @@ using namespace std;
 #define debugArr(...)
 #endif
 
-#define int long long
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 #define sorta(a) sort(all(a))
@@ -37,24 +36,51 @@ constexpr ll INF = numeric_limits<ll>::max();
 
 class Solution
 {
+    int helper(vector<pair<int, pii>> &g, int index, string &mask, vector<unordered_map<string, int>> &dp)
+    {
+        if (index >= g.size())
+        {
+            return 0;
+        }
+
+        if (dp[index].find(mask) != dp[index].end())
+        {
+            return dp[index][mask];
+        }
+        // skip this index
+        int sum = helper(g, index + 1, mask, dp);
+
+        // if row not taken take this element in ans
+        int row = g[index].second.first;
+        if (mask[row] == '0')
+        {
+            mask[row] = '1';
+            int j = index + 1;
+            while (j < g.size() && g[index].first == g[j].first)
+                j++;
+            sum = max(sum, helper(g, j, mask, dp) + g[index].first);
+            mask[row] = '0';
+        }
+        return dp[index][mask] = sum;
+    }
+
 public:
-    // int helper(vi &grid, int i,)
-    // {
-    //     if (i == grid.size())
-    //         return 0;
-    // }
     int maxScore(vector<vector<int>> &grid)
     {
-        int ans = 0;
-        vi g;
-        FOR(i, 0, grid.size() - 1)
+        vector<pair<int, pii>> g;
+        for (int i = 0; i < grid.size(); i++)
         {
-            FOR(j, 0, grid[i].size() - 1)
+            for (int j = 0; j < grid[i].size(); j++)
             {
-                g.PB(grid[i][j]);
+                g.PB({grid[i][j], {i, j}});
             }
         }
-        return ans;
+        sortd(g);
+        debug(g);
+        vector<unordered_map<string, int>> dp(g.size());
+        string mask(grid.size(), '0');
+
+        return helper(g, 0, mask, dp);
     }
 };
 
@@ -66,8 +92,13 @@ int main()
 {
     Solution s;
 
-    // cout << s.checkTwoChessboards("a1", "b2") << endl;
-    cout << endl;
+    // [[1,2,3],[4,3,2],[1,1,1]]
+    vector<vector<int>> grid = {{1, 2, 3}, {4, 3, 2}, {1, 1, 1}};
+    cout << s.maxScore(grid) << endl;
+
+    // [[8,7,6],[8,3,2]]
+    grid = {{8, 7, 6}, {8, 3, 2}};
+    cout << s.maxScore(grid) << endl;
 
     return 0;
 }
