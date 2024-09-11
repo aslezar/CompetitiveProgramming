@@ -1,9 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// bitmask:https://leetcode.com/problems/select-cells-in-grid-with-maximum-score/description/
-// pnc:https://leetcode.com/problems/maximum-xor-score-subarray-queries/description/
-
 #ifdef LOCAL_RUN
 #include "debug.cpp"
 #else
@@ -18,13 +15,17 @@ using namespace std;
 #define sortd(a) sort(rall(a))
 #define set_bits __builtin_popcount
 
+#define F first
+#define S second
+#define PB push_back
+#define gcd __gcd
 #define FOR(i, a, b) for (int i = a; i <= b; i++)
 #define input(vec, n) FOR(i, 0, n - 1) std::cin >> vec[i];
 
 typedef long long ll;
 typedef vector<int> vi;
 typedef pair<int, int> pii;
-typedef vector<vector<int>> vii;
+typedef vector<vector<int>> vvi;
 
 constexpr unsigned int mod = 1e9 + 7;
 
@@ -34,6 +35,7 @@ void solve([[maybe_unused]] ll &_case_no)
     cin >> n;
     vi v(n);
     input(v, n);
+
 }
 
 int32_t main()
