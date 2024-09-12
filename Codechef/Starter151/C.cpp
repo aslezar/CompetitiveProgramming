@@ -29,48 +29,19 @@ void solve([[maybe_unused]] ll &_case_no)
 {
     unsigned long long a, b, k;
     cin >> a >> b >> k;
-
-    if (k == 1)
+    int x = a / b;
+    k--;
+    debug(x);
+    if (k <= x)
     {
-        cout << "0" << endl;
-        return;
+        cout << k * b << endl;
     }
-
-    if (a == b)
+    else
     {
-        unsigned long long index = (k - 1) * 2;
-        unsigned long long ans = ((index / 2) * b);
-        if (index % 2 == 1)
-        {
-            ans += a;
-        }
-        cout << ans << endl;
-    }
-    else if (a < b)
-    {
-        unsigned long long index = k - 1;
-        unsigned long long ans = ((index / 2) * b);
-        if (index % 2 == 1)
-        {
-            ans += a;
-        }
-        cout << ans << endl;
-    }
-    else if (a > b)
-    {
-        assert(k > 1);
-        unsigned long long index = ((k / 2) * 2);
-        if (k % 2 == 1)
-        {
-            index--;
-        }
-        // debug(index);
-        unsigned long long ans = ((index / 2) * b);
-        if (index % 2 == 1)
-        {
-            ans += a;
-        }
-        cout << ans << endl;
+        debug(k);
+        k -= x;
+        debug(k);
+        cout << (((x + (k / 2)) * b) + ((k & 1) * (a % b))) << endl;
     }
 }
 
