@@ -15,47 +15,42 @@ using namespace std;
 #define sortd(a) sort(rall(a))
 #define set_bits __builtin_popcount
 
+#define F first
+#define S second
+#define PB push_back
+#define gcd __gcd
 #define FOR(i, a, b) for (int i = a; i <= b; i++)
 #define input(vec, n) FOR(i, 0, n - 1) std::cin >> vec[i];
 
 typedef long long ll;
 typedef vector<int> vi;
 typedef pair<int, int> pii;
-typedef vector<vector<int>> vii;
+typedef vector<vector<int>> vvi;
 
 constexpr unsigned int mod = 1e9 + 7;
+constexpr unsigned int maxn = 1e5 + 4;
+constexpr float EPS = numeric_limits<float>::epsilon();
+constexpr ll INF = numeric_limits<ll>::max();
 
 void solve([[maybe_unused]] ll &_case_no)
 {
     ll n = 0;
     cin >> n;
-    // x,time_taken
-    vector<pair<int, long double>> x(n);
+    ll k = 0;
+    cin >> k;
+    vi v(n);
+    input(v, n);
 
-    for (int i = 0; i < n; i++)
+    ll sum = 0;
+    for (int i = 0; i < k; i++)
     {
-        cin >> x[i].first;
+        sum += v[i];
     }
-    long double speed;
-    for (int i = 0; i < n; i++)
+    for (int i = k; i < n - 1; i++)
     {
-        cin >> speed;
-        x[i].second = x[i].first / speed;
+        cout << v[i] << ' ';
     }
-    sorta(x);
-    // debug(x);
-    int collison = 0;
-    long double minTime = x.back().second;
-    for (int i = n - 2; i >= 0; i--)
-    {
-        if (x[i].second > minTime)
-        {
-            collison++;
-        }
-        minTime = min(minTime, x[i].second);
-    }
-    // debug(collison);
-    cout << n - collison << endl;
+    cout << v.back() + sum << endl;
 }
 
 int32_t main()

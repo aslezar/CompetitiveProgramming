@@ -15,38 +15,45 @@ using namespace std;
 #define sortd(a) sort(rall(a))
 #define set_bits __builtin_popcount
 
-#define F first
-#define S second
-#define PB push_back
-#define gcd __gcd
 #define FOR(i, a, b) for (int i = a; i <= b; i++)
 #define input(vec, n) FOR(i, 0, n - 1) std::cin >> vec[i];
 
 typedef long long ll;
 typedef vector<int> vi;
 typedef pair<int, int> pii;
-typedef vector<vector<int>> vvi;
+typedef vector<vector<int>> vii;
 
 constexpr unsigned int mod = 1e9 + 7;
-constexpr unsigned int maxn = 1e5 + 4;
-constexpr float EPS = numeric_limits<float>::epsilon();
-constexpr ll INF = numeric_limits<ll>::max();
 
 void solve([[maybe_unused]] ll &_case_no)
 {
-    ll x, y;
-    cin >> x >> y;
-    if (x >= 2 * y || y >= 2 * x)
+    ll n = 0;
+    cin >> n;
+    string s;
+    cin >> s;
+    // debug(s);
+    int cnt0 = 0;
+    for (auto &i : s)
     {
-        cout << 0 << endl;
-        return;
+        if (i == '0')
+            cnt0++;
     }
-    if (x > y)
+    int ans = 0;
+    int cnt1 = n - cnt0;
+    // debug(cnt0, cnt1);
+    for (int k = 1; k <= n; k++)
     {
-        swap(x, y);
+        if ((k - cnt0 >= 0) && (k - cnt0) % 2 == 0)
+        {
+            debug(k);
+            ans++;
+        }
+        else if ((k - cnt1 >= 0) && (k - cnt1) % 2 == 0)
+        {
+            debug(k);
+            ans++;
+        }
     }
-    assert(x <= y);
-    int ans = x - (y / 2);
     cout << ans << endl;
 }
 

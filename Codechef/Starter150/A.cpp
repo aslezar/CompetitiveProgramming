@@ -28,14 +28,26 @@ typedef pair<int, int> pii;
 typedef vector<vector<int>> vvi;
 
 constexpr unsigned int mod = 1e9 + 7;
+constexpr unsigned int maxn = 1e5 + 4;
+constexpr float EPS = numeric_limits<float>::epsilon();
+constexpr ll INF = numeric_limits<ll>::max();
 
 void solve([[maybe_unused]] ll &_case_no)
 {
-    ll n = 0;
-    cin >> n;
-    vi v(n);
-    input(v, n);
-
+    ll x, y;
+    cin >> x >> y;
+    if (x >= 2 * y || y >= 2 * x)
+    {
+        cout << 0 << endl;
+        return;
+    }
+    if (x > y)
+    {
+        swap(x, y);
+    }
+    assert(x <= y);
+    int ans = x - (y / 2);
+    cout << ans << endl;
 }
 
 int32_t main()
