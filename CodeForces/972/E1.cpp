@@ -25,35 +25,6 @@ typedef vector<vector<int>> vii;
 
 constexpr unsigned int mod = 1e9 + 7;
 
-bool canIndexWin(vi &a, vii &mat, int index, int row, int col, vector<vector<vector<int>>> &dp)
-{
-    ll n = mat.size();
-    ll m = mat[0].size();
-
-    if (row >= n || col >= m || index >= a.size())
-    {
-        //"Lose"
-        return false;
-    }
-    if (dp[index][row][col] != -1)
-        return dp[index][row][col];
-
-    for (size_t i = n - 1; i >= row; i--)
-    {
-        for (size_t j = m - 1; j >= col; j--)
-        {
-            if (a[index] == mat[i][j])
-            {
-                if (canIndexWin(a, mat, index + 1, i + 1, j + 1, dp) == false)
-                {
-                    debug(index, i, j);
-                    return dp[index][row][col] = 1;
-                }
-            }
-        }
-    }
-    return dp[index][row][col] = false;
-}
 void solve([[maybe_unused]] ll &_case_no)
 {
     ll l, n, m;
@@ -73,9 +44,60 @@ void solve([[maybe_unused]] ll &_case_no)
             cin >> mat[i][j];
         }
     }
-    vector<vector<vector<int>>> dp(l + 1, vii(n + 1, vi(m + 1, -1)));
-    bool ans = canIndexWin(a, mat, 0, 0, 0, dp);
-    cout << (ans == true ? 'T' : 'N') << '\n';
+    // unordered_set<int> vis;
+    // for (int i = 0; i < l; i++)
+    // {
+    //     if (vis.count(a[i]))
+    //     {
+    //         l = i;
+    //         break;
+    //     }
+    //     vis.insert(a[i]);
+    // }
+
+    vector<vii> dp(n, vii(m, vi(l)));
+
+    for (int i = n - 1; i >= 0; i--)
+    {
+        for (int j = m - 1; j >= 0; j--)
+        {
+            for (int k = 0; k < l; k++)
+            {
+                // dp[i][j][k] = 1;
+                if (i + 1 < n && dp[i + 1][j][k] == 1)
+                {
+                    dp[i][j][k] = 1;
+                    continue;
+                }
+                if (j + 1 < m && dp[i][j + 1][k] == 1)
+                {
+                    dp[i][j][k] = 1;
+                    continue;
+                }
+                if (i + 1 < n && j + 1 < m && dp[i + 1][j + 1][k] == 1)
+                {
+                    dp[i][j][k] = 1;
+                    continue;
+                }
+                if (mat[i][j] == a[k])
+                {
+                    if (k == l - 1 || i == n - 1 || j == m - 1)
+                    {
+                        dp[i][j][k] = 1;
+                    }
+                    else
+                    {
+                        dp[i][j][k] = !dp[i + 1][j + 1][k + 1];
+                    }
+                }
+                else
+                {
+                    dp[i][j][k] = 0;
+                }
+            }
+        }
+    }
+    cout << (dp[0][0][0] == 1 ? 'T' : 'N') << '\n';
 }
 
 int32_t main()
