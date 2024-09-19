@@ -15,9 +15,9 @@ long long GCD(long long a, long long b)
     return a;
 }
 
+// this function multiplies a number by itself n times in O(logn)
 long long power_mod(long long base, long long exp, long long mod = 1e9 + 7)
 {
-    // this function multiplies a number by itself n times in O(logn)
     long long result = 1;
     while (exp > 0)
     {
@@ -27,6 +27,16 @@ long long power_mod(long long base, long long exp, long long mod = 1e9 + 7)
         exp = exp / 2;
     }
     return result;
+}
+
+ll fact(ll n)
+{
+    ll ans = 1;
+    for (ll i = 1; i <= n; i++)
+    {
+        ans = (ans * i) % mod;
+    }
+    return ans % mod;
 }
 
 struct custom_hash
