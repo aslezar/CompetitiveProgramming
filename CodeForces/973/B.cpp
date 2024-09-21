@@ -32,35 +32,14 @@ void solve([[maybe_unused]] ll &_case_no)
     vi v(n);
     input(v, n);
 
-    ll sum = accumulate(all(v), 0LL);
-    ll x = 0;
-
-    for (size_t i = 0; i < n; i++)
+    ll sum = 0;
+    for (size_t i = 0; i < n - 2; i++)
     {
-        ll avg = sum / (n - i);
-        // debug(v[i], avg, sum, x);
-        if (v[i] == avg)
-        {
-            sum -= v[i];
-            continue;
-        }
-
-        if (v[i] < avg)
-        {
-            ll increaseBy = min(avg - v[i], x);
-            v[i] += increaseBy;
-            x -= increaseBy;
-            sum -= v[i];
-        }
-        else
-        {
-            ll decreaseBy = v[i] - avg;
-            v[i] -= decreaseBy;
-            x += decreaseBy;
-            sum -= v[i];
-        }
+        sum += v[i];
     }
-    cout << (*max_element(all(v)) - *min_element(all(v))) << endl;
+
+    ll ans = v[n - 1] - v[n - 2] + sum;
+    cout << ans << '\n';
 }
 
 int32_t main()

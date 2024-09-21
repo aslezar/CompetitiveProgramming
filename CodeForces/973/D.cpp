@@ -60,6 +60,7 @@ void solve([[maybe_unused]] ll &_case_no)
             sum -= v[i];
         }
     }
+    debug(v);
     cout << (*max_element(all(v)) - *min_element(all(v))) << endl;
 }
 

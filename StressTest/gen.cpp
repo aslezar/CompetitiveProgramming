@@ -10,8 +10,8 @@ int32_t main(int argc, char *argv[])
 {
     srand(atoi(argv[1]));
     cout << "1\n";
-    int n = 3;
-    // cout<<n<<'\n';
+    int n = rand(1, 10);
+    cout << n << '\n';
     // set<int> used;
     for (int i = 0; i < n; i++)
     {
