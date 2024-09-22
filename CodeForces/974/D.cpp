@@ -27,11 +27,31 @@ constexpr unsigned int mod = 1e9 + 7;
 
 void solve([[maybe_unused]] ll &_case_no)
 {
-    ll n = 0;
-    cin >> n;
-    
-    vi v(n);
-    input(v, n);
+    ll n = 0, d = 0, k = 0;
+    cin >> n >> d >> k;
+
+    vector<int> overlap(n + 2, 0);
+    d--;
+
+    for (int i = 0; i < k; i++)
+    {
+        int l, r;
+        cin >> l >> r;
+        overlap[max(1ll, l - d)]++;
+        overlap[r + 1]--;
+    }
+
+    for (int i = 1; i <= n; i++)
+    {
+        overlap[i] += overlap[i - 1];
+    }
+
+    // debug(overlap);
+
+    auto mx = max_element(overlap.begin() + 1, overlap.end() - d - 1);
+    auto mn = min_element(overlap.begin() + 1, overlap.end() - d - 1);
+
+    cout << (mx - overlap.begin()) << " " << (mn - overlap.begin()) << '\n';
 }
 
 int32_t main()

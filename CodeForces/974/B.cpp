@@ -29,9 +29,21 @@ void solve([[maybe_unused]] ll &_case_no)
 {
     ll n = 0;
     cin >> n;
-    
-    vi v(n);
-    input(v, n);
+    ll k = 0;
+    cin >> k;
+
+    ll start = n - k + 1;
+
+    ll len = n - start + 1;
+    ll noOfOdd = len / 2;
+    if (len & 1 && start & 1)
+        noOfOdd++;
+
+    debug(start, len, noOfOdd);
+    if (noOfOdd & 1)
+        cout << "No\n";
+    else
+        cout << "Yes\n";
 }
 
 int32_t main()

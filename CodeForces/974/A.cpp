@@ -29,9 +29,28 @@ void solve([[maybe_unused]] ll &_case_no)
 {
     ll n = 0;
     cin >> n;
-    
+
+    ll k = 0;
+    cin >> k;
+
     vi v(n);
-    input(v, n);
+    ll ans = 0;
+    ll gold = 0;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> v[i];
+        if (v[i] >= k)
+        {
+            gold += v[i];
+        }
+        else if (v[i] == 0 && gold > 0)
+        {
+            ans++;
+            gold--;
+            
+        }
+    }
+    cout << ans << '\n';
 }
 
 int32_t main()

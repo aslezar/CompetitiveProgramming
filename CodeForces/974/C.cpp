@@ -29,9 +29,35 @@ void solve([[maybe_unused]] ll &_case_no)
 {
     ll n = 0;
     cin >> n;
-    
+
     vi v(n);
-    input(v, n);
+    double sum = 0;
+    for (size_t i = 0; i < n; i++)
+    {
+        cin >> v[i];
+        sum += v[i];
+    }
+
+    if (n <= 2)
+    {
+        cout << -1 << '\n';
+        return;
+    }
+
+    double avg = sum / n;
+    sorta(v);
+
+    double val = v[(n / 2)];
+
+    debug(sum, avg, val);
+
+    if (val < avg / 2)
+        cout << 0 << '\n';
+    else
+    {
+        ll x = (2 * val) * n - sum + 1;
+        cout << x << '\n';
+    }
 }
 
 int32_t main()
