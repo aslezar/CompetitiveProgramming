@@ -84,26 +84,15 @@ void solve([[maybe_unused]] ll &_case_no)
             break;
         assert(ans.size() < n);
 
-        // cout << "? 1" + ans << endl;
         bool res1 = ask("1" + ans);
         if (res1 == 1)
         {
             ans = "1" + ans;
-            if (ans.size() == n)
-                break;
-            continue;
         }
-
-        // cout << "? 0" + ans << endl;
-        bool res0 = ask("0" + ans);
-        if (res0 == 1)
+        else
         {
             ans = "0" + ans;
-            if (ans.size() == n)
-                break;
-            continue;
         }
-        break;
     }
 
     cout << "! " << ans << endl;
