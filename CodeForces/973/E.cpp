@@ -13,57 +13,59 @@ using namespace std;
 #define rall(a) (a).rbegin(), (a).rend()
 #define sorta(a) sort(all(a))
 #define sortd(a) sort(rall(a))
-#define set_bits __builtin_popcount
+#define input(vec, n)           \
+    for (int i = 0; i < n; i++) \
+        std::cin >> vec[i];
 
-#define FOR(i, a, b) for (int i = a; i <= b; i++)
-#define input(vec, n) FOR(i, 0, n - 1) std::cin >> vec[i];
+#define el << endl;
+#define ws << " ";
 
 typedef long long ll;
 typedef vector<int> vi;
-typedef pair<int, int> pii;
 typedef vector<vector<int>> vii;
-
 constexpr unsigned int mod = 1e9 + 7;
 
 void solve([[maybe_unused]] ll &_case_no)
 {
     ll n = 0;
     cin >> n;
+
     vi v(n);
     input(v, n);
 
-    stack<pair<ll, ll>> s;
-    for (size_t i = 0; i < n; i++)
+    int g = 0;
+    for (int i = 0; i < n; i++)
     {
-        ll sum = v[i], cnt = 1;
-        while (s.size() && s.top().first >= (sum / cnt))
+        g = __gcd(g, v[i]);
+    }
+    for (int i = 0; i < n; i++)
+    {
+        v[i] /= g;
+    }
+    debug(g);
+
+    int curGCD = 0;
+    int ans = 0;
+    debug(v);
+    for (int i = 0; i < n; i++)
+    {
+        ll mn = INT_MAX;
+        for (int j = 0; j < n; j++)
         {
-            auto t = s.top();
-            s.pop();
-            sum += (t.first * t.second);
-            cnt += t.second;
+            ll x = __gcd(curGCD, v[j]);
+            debug(x);
+            mn = min(mn, __gcd(curGCD, v[j]));
         }
-        if (sum % cnt == 0)
+        debug(mn);
+        curGCD = mn;
+        ans += curGCD;
+        if (curGCD == 1)
         {
-            s.push({sum / cnt, cnt});
-        }
-        else
-        {
-            s.push({sum / cnt, cnt - sum % cnt});
-            s.push({sum / cnt + 1, sum % cnt});
+            ans += (n - i - 1);
+            break;
         }
     }
-
-    ll mn = LLONG_MAX;
-    ll mx = LLONG_MIN;
-
-    while (!s.empty())
-    {
-        mn = min(mn, s.top().first);
-        mx = max(mx, s.top().first);
-        s.pop();
-    }
-    cout << (mx - mn) << '\n';
+    cout << ans * g << '\n';
 }
 
 int32_t main()
