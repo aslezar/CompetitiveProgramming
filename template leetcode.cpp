@@ -1,23 +1,17 @@
 #ifdef LOCAL_RUN
-
 #include <bits/stdc++.h>
 using namespace std;
 #include "debug.cpp"
-
 #else
 #define debug(...)
 #define debugArr(...)
 #endif
 
-#define int long long
+// #define int long long
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 #define sorta(a) sort(all(a))
 #define sortd(a) sort(rall(a))
-#define set_bits __builtin_popcount
-
-#define FOR(i, a, b) for (int i = a; i <= b; i++)
-#define input(vec, n) FOR(i, 0, n - 1) std::cin >> vec[i];
 
 typedef long long ll;
 typedef vector<int> vi;
@@ -29,9 +23,9 @@ constexpr unsigned int mod = 1e9 + 7;
 class Solution
 {
 public:
-    bool checkTwoChessboards(string coordinate1, string coordinate2)
+    bool checkTwoChessboards(string a)
     {
-        return abs((coordinate1[0] - 'a' + coordinate1[1]) - (coordinate2[0] - 'a' + coordinate2[1])) % 2 == 0;
+        return 0;
     }
 };
 
@@ -43,8 +37,8 @@ int main()
 {
     Solution s;
 
-    cout << s.checkTwoChessboards("a1", "b2") << endl;
-    cout << endl;
+    cout << s.checkTwoChessboards("a1");
+    cout << '\n';
 
     return 0;
 }
