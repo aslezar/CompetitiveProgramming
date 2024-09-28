@@ -25,23 +25,36 @@ typedef vector<vector<int>> vii;
 
 constexpr unsigned int mod = 1e9 + 7;
 
-int helper(int index, vi &v, vii &dp, int mx = 0)
-{
-    if (index >= v.size())
-    {
-        return mx;
-    }
-    if (dp[index][mx] != -1)
-        return dp[index][mx];
-    // don;t take this value
-    ll ans = helper(index + 1, v, dp, mx);
+// int helper(int index, vi &v, vii &dp, int mx = 0)
+// {
+//     if (index >= v.size())
+//     {
+//         return mx;
+//     }
+//     if (dp[index][mx] != -1)
+//         return dp[index][mx];
+//     // don;t take this value
+//     ll ans = helper(index + 1, v, dp, mx);
 
-    // take this value if prev value not taken
-    mx = max(mx, v[index]);
-    ans = max(ans, 1 + helper(index + 2, v, dp, mx));
+//     // take this value if prev value not taken
+//     mx = max(mx, v[index]);
+//     ans = max(ans, 1 + helper(index + 2, v, dp, mx));
 
-    return dp[index][mx] = ans;
-}
+//     return dp[index][mx] = ans;
+// }
+
+// void solve([[maybe_unused]] ll &_case_no)
+// {
+//     ll n = 0;
+//     cin >> n;
+
+//     vi v(n);
+//     input(v, n);
+
+//     vii dp(n, vi(1002, -1));
+
+//     cout << helper(0, v, dp) << endl;
+// }
 
 void solve([[maybe_unused]] ll &_case_no)
 {
@@ -51,9 +64,35 @@ void solve([[maybe_unused]] ll &_case_no)
     vi v(n);
     input(v, n);
 
-    vii dp(n, vi(1002, -1));
+    if (n & 1)
+    {
+        int mx = *max_element(all(v));
 
-    cout << helper(0, v, dp) << endl;
+        // found at odd index
+        bool found = false;
+        for (int i = 0; i < n; i++)
+        {
+            if (v[i] == mx && i % 2 == 0)
+            {
+                found = true;
+                break;
+            }
+        }
+        if (found)
+        {
+            cout << mx + (n + 1) / 2;
+        }
+        else
+        {
+            cout << mx + (n) / 2;
+        }
+    }
+    else
+    {
+        int ans = *max_element(all(v)) + n / 2;
+        cout << ans;
+    }
+    cout << '\n';
 }
 
 int32_t main()

@@ -29,10 +29,10 @@ long long power_mod(long long base, long long exp, long long mod = 1e9 + 7)
     return result;
 }
 
-ll fact(ll n)
+long long fact(long long n, long long mod = 1e9 + 7)
 {
-    ll ans = 1;
-    for (ll i = 1; i <= n; i++)
+    long long ans = 1;
+    for (long long i = 1; i <= n; i++)
     {
         ans = (ans * i) % mod;
     }
