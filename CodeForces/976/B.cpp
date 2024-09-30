@@ -30,6 +30,13 @@ void solve([[maybe_unused]] ll &_case_no)
     ll k = 0;
     cin >> k;
 
+    // ll n = k + sqrtl(k);
+    // if (n - floor(sqrtl(n)) < k)
+    // {
+    //     n++;
+    // }
+    // cout << n el;
+
     ll n = LLONG_MAX;
 
     int l = 1, r = LLONG_MAX;
