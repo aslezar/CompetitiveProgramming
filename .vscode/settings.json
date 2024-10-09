@@ -102,6 +102,7 @@
         "__hash_table": "cpp",
         "__tree": "cpp",
         "__locale": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "__string": "cpp"
     }
 }
