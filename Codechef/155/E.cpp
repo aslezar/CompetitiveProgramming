@@ -46,28 +46,32 @@ long long power_mod(long long base, long long exp, long long mod = 1e9 + 7)
     return result;
 }
 
+long long nCr(long long a, ll b)
+{
+    long long ans = fact[a + b];
+    ans = (ans * power_mod(fact[a], mod - 2, mod)) % mod;
+    ans = (ans * power_mod(fact[b], mod - 2, mod)) % mod;
+    return ans;
+}
+
 void solve([[maybe_unused]] ll &_case_no)
 {
-    ll a, b;
-    cin >> a >> b;
+    ll total0, total1;
+    cin >> total0 >> total1;
 
-    ll half_sum = (a + b) / 2;
+    ll half_sum = (total0 + total1) / 2;
     int A = (half_sum + 1) / 2;
     int B = half_sum / 2;
 
-    int max1 = min(b, B);
-    int min1 = max(0ll, half_sum - a);
-
     ll ans = 0;
 
-    for (int i = 0; i <= b / 2; i++)
+    for (int i = 0; i <= B; i++)
     {
+        if (A - i < 0 || B - i < 0 || total1 - 2 * i < 0 || half_sum - (total1 - 2 * i) < 0)
+            continue;
+        int curArr = ((nCr(i, A - i) * nCr(i, B - i)) % mod) * nCr(total1 - 2 * i, half_sum - (total1 - 2 * i)) % mod;
 
-        int noOf1Arr1 = i * 2;
-        int noOf1Arr2 = b - noOf1Arr1;
-
-        int noOf0Arr1 = half_sum - noOf1Arr1;
-        int noOf0Arr2 = a - noOf0Arr1;
+        ans = (ans + curArr) % mod;
     }
 
     cout << ans el;
