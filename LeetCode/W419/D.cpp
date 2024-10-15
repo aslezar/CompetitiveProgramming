@@ -123,6 +123,89 @@ public:
     }
 };
 
+class Solution2
+{
+public:
+    vector<ll> findXSum(vector<int> &nums, int k, int x)
+    {
+        vector<ll> ans;
+        unordered_map<ll, ll> freq;
+
+        set<pair<ll, ll>, greater<pair<ll, ll>>> s;
+        set<pair<ll, ll>, greater<pair<ll, ll>>> xTop;
+
+        for (int i = 0; i < k; i++)
+        {
+            s.erase({freq[nums[i]], nums[i]});
+            freq[nums[i]]++;
+            s.insert({freq[nums[i]], nums[i]});
+        }
+        ll sum = 0;
+        auto it = s.begin();
+        for (int i = 0; i < x; i++)
+        {
+            if (it == s.end())
+                break;
+            xTop.insert(*it);
+            sum += (it->second * it->first);
+            it++;
+        }
+
+        debug(s, xTop, sum);
+        auto it2 = s.begin();
+        advance(it2, min(x, (int)s.size()));
+        s.erase(s.begin(), it2);
+        ans.push_back(sum);
+        debug(s, xTop, sum);
+
+        for (int i = k; i < nums.size(); i++)
+        {
+            if (xTop.find({freq[nums[i - k]], nums[i - k]}) != xTop.end())
+            {
+                xTop.erase({freq[nums[i - k]], nums[i - k]});
+                sum -= (freq[nums[i - k]] * nums[i - k]);
+            }
+            s.erase({freq[nums[i - k]], nums[i - k]});
+            freq[nums[i - k]]--;
+            if (freq[nums[i - k]] > 0)
+                s.insert({freq[nums[i - k]], nums[i - k]});
+
+            if (xTop.find({freq[nums[i]], nums[i]}) != xTop.end())
+            {
+                xTop.erase({freq[nums[i]], nums[i]});
+                sum -= (freq[nums[i]] * nums[i]);
+            }
+            s.erase({freq[nums[i]], nums[i]});
+            freq[nums[i]]++;
+            s.insert({freq[nums[i]], nums[i]});
+
+            if (xTop.size() > 0)
+            {
+                auto it = xTop.rbegin();
+                s.insert(*it);
+                sum -= (it->second * it->first);
+                xTop.erase(*it);
+            }
+
+            while (xTop.size() < x)
+            {
+                if (s.size() == 0)
+                    break;
+                auto it = s.begin();
+                xTop.insert(*it);
+                sum += (it->second * it->first);
+                s.erase(it);
+            }
+
+            debug(nums[i], s, xTop, sum);
+
+            ans.push_back(sum);
+        }
+
+        return ans;
+    }
+};
+
 #undef int
 
 #ifdef LOCAL_RUN
