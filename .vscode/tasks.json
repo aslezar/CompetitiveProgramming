@@ -27,6 +27,7 @@
             "command": "/bin/g++",
             "args": [
                 "-fdiagnostics-color=always",
+                "-std=c++20",
                 "-g",
                 "-O2",
                 "-I${workspaceFolder}",
