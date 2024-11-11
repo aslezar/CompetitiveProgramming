@@ -54,10 +54,9 @@ void solve([[maybe_unused]] ll &_case_no)
         int m;
         cin >> m;
 
-        int s = 0, e = n - 1;
+        int s = 0, e = n;
         if (s <= e)
         {
-
             for (int mm = 0; mm < m; mm++)
             {
                 int r;
@@ -66,20 +65,17 @@ void solve([[maybe_unused]] ll &_case_no)
                 cin >> r >> o >> c;
                 r--;
 
-                auto t = upper_bound(v[r].begin() + s, v[r].begin() + e + 1, c) - v[r].begin();
                 if (o == '>')
                 {
-                    s = t;
+                    s = max(s, (int)(upper_bound(v[r].begin(), v[r].end(), c) - v[r].begin()));
                 }
                 else
                 {
-                    e = t - 1;
+                    e = min(e, (int)(lower_bound(v[r].begin(), v[r].end(), c) - v[r].begin()));
                 }
-                debug(s, e, t);
             }
         }
-
-        if (s <= e)
+        if (s < e)
         {
             cout << s + 1 el;
         }

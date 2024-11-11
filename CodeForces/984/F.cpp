@@ -8,7 +8,7 @@ using namespace std;
 #define debugArr(...)
 #endif
 
-#define int long long
+#define int unsigned long long
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 #define sorta(a) sort(all(a))
@@ -20,32 +20,81 @@ using namespace std;
 #define el << endl;
 #define ws << " ";
 
-typedef long long ll;
-typedef vector<int> vi;
-typedef vector<vector<int>> vii;
-constexpr unsigned int mod = 1e9 + 7;
+typedef unsigned long long ll;
+
+int xorTill(int n)
+{
+    int r = n % 4;
+    switch (r)
+    {
+    case 0:
+        return n;
+        break;
+
+    case 1:
+        return 1;
+        break;
+
+    case 2:
+        return n + 1;
+        break;
+
+    case 3:
+        return 0;
+        break;
+    }
+    return 0;
+}
 
 void solve([[maybe_unused]] ll &_case_no)
 {
-    ll n = 0;
-    cin >> n;
+    // (1≤l≤r≤1018, 0≤i≤30, 0≤k<2i)
+    ll l, r, i, k;
+    cin >> l >> r >> i >> k;
 
-    vi v(n);
-    input(v, n);
+    // debug(l, r, i, k);
 
-    int x = 0;
-    for (int i = 1; i <= 32; i++)
-    {
-        // if (i % 2 != 0)
-        // {
-        x = x ^ (i);
-        // }
-        // debug(x);
-    }
-    debug(15^23);
-    x = 2 ^ 3 ^ 4 ^ 5 ^ 6 ^ 15 ^ 23;
-    x ^= (24 ^ 25 ^ 26 ^ 27 ^ 28);
-    debug(x);
+    // int ans = helper(r, i, k) ^ helper(l - 1, i, k);
+
+    int ans = xorTill(r) ^ xorTill(l - 1);
+    // debug(ans);
+
+    int m = 1LL << i;
+
+    k %= m;
+
+    // debug((r - k + m) / (m * 1.0));
+    int n1 = ceil((l - k + m) / (m * 1.0L));
+    int n2 = floor((r - k + m) / (m * 1.0L));
+    // debug(n1, n2);
+
+    int cnt = n2 - n1 + 1;
+    // debug(cnt);
+
+    int v1 = k + (n1 - 1) * m;
+    int v2 = k + (n2 - 1) * m;
+
+    // debug(v1, v2);
+
+    v1 = v1 >> i;
+    v2 = v2 >> i;
+
+    // debug(v1, v2);
+
+    int x = xorTill(v1 - 1) ^ xorTill(v2);
+    // debug(x);
+    x = x << i;
+    // debug(x);
+    if (cnt & 1)
+        x += k;
+    // debug(x);
+
+    bitset<64> binary(v1);
+    // debug(binary);
+
+    ans ^= x;
+
+    cout << ans el;
 }
 
 int32_t main()
