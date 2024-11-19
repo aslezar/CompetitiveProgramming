@@ -76,3 +76,19 @@ long long LCM(long long a, long long b)
 {
     return (a / GCD(a, b)) * b;
 }
+
+const int size_prime = 1e6 + 1;
+int spf[size_prime] = {0};
+void SieveOfEratosthenes()
+{
+    for (int i = 2; i * i < size_prime; i++)
+    {
+        if (spf[i] == 0) // means prime
+        {
+            for (int j = i * i; j < size_prime; j += i)
+            {
+                spf[j] = 1;
+            }
+        }
+    }
+}
