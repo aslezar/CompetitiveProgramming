@@ -25,6 +25,24 @@ typedef vector<int> vi;
 typedef vector<vector<int>> vii;
 constexpr unsigned int mod = 1e9 + 7;
 
+int count(vi &c)
+{
+    vi a = {c[0], c[1]};
+    int ans = 0;
+
+    for (int i = 2; i < c.size(); i++)
+    {
+        if (c[i] <= a[0] + a[1])
+        {
+            ans++;
+        }
+        a.push_back(c[i]);
+        sortd(a);
+        a.pop_back();
+    }
+    return ans;
+}
+
 vector<unordered_map<int, int>> dp;
 int helper(int i, vi &v, vi &v2, int a, int b)
 {
@@ -58,6 +76,27 @@ int helper(int i, vi &v, vi &v2, int a, int b)
     // return max(ans1, ans2);
     return dp[i][a + b] = max(ans1, ans2);
 }
+int ans = 0;
+void backtrack(int i, vi &a, vi &b, vi &c)
+{
+    if (i >= a.size())
+    {
+        int curAns = count(c);
+        ans = max(ans, curAns);
+        if(ans==3){
+            debug(c);
+        }
+        return;
+    }
+
+    c.push_back(a[i]);
+    backtrack(i + 1, a, b, c);
+    c.pop_back();
+
+    c.push_back(b[i]);
+    backtrack(i + 1, a, b, c);
+    c.pop_back();
+}
 
 void solve([[maybe_unused]] ll &_case_no)
 {
@@ -70,11 +109,22 @@ void solve([[maybe_unused]] ll &_case_no)
     vi v2(n);
     input(v2, n);
 
-    dp = vector<unordered_map<int, int>>(3001);
-
-    int ans = 0;
-    ans = max(ans, helper(2, v, v2, max(v[0], v2[0]), max(v[1], v2[1])));
+    ans = 0;
+    vi c;
+    backtrack(0, v, v2, c);
     cout << ans el
+
+    // dp = vector<unordered_map<int, int>>(3001);
+
+    // int ans = 0;
+    // for (int i = 0; i < 2; i++)
+    // {
+    //     for (int j = 0; j < 2; j++)
+    //     {
+    //         ans = max(ans, helper(2, v, v2, max(v[i], v2[j]), min(v[i], v2[j])));
+    //     }
+    // }
+    // cout << ans el
 }
 
 int32_t main()

@@ -25,56 +25,54 @@ typedef vector<int> vi;
 typedef vector<vector<int>> vii;
 constexpr unsigned int mod = 1e9 + 7;
 
-vector<unordered_map<int, int>> dp;
-int helper(int i, vi &v, vi &v2, int a, int b)
-{
-    if (i == v.size())
-    {
-        return 0;
-    }
-
-    if (dp[i].count(a + b))
-    {
-        return dp[i][a + b];
-    }
-
-    vi v3 = {a, b};
-    v3.push_back(v[i]);
-    sortd(v3);
-    int ans1 = helper(i + 1, v, v2, v3[0], v3[1]);
-    if (v[i] <= a + b)
-    {
-        ans1++;
-    }
-
-    vi v4 = {a, b};
-    v4.push_back(v2[i]);
-    sortd(v4);
-    int ans2 = helper(i + 1, v, v2, v4[0], v4[1]);
-    if (v2[i] <= a + b)
-    {
-        ans2++;
-    }
-    // return max(ans1, ans2);
-    return dp[i][a + b] = max(ans1, ans2);
-}
-
 void solve([[maybe_unused]] ll &_case_no)
 {
     ll n = 0;
     cin >> n;
 
-    vi v(n);
-    input(v, n);
+    int k = 0;
+    cin >> k;
 
-    vi v2(n);
-    input(v2, n);
+    vii queries(k, vector<int>(3));
+    for (int i = 0; i < k; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            cin >> queries[i][j];
+        }
+    }
 
-    dp = vector<unordered_map<int, int>>(3001);
+    vector<set<int>> v(n);
 
-    int ans = 0;
-    ans = max(ans, helper(2, v, v2, max(v[0], v2[0]), max(v[1], v2[1])));
-    cout << ans el
+    for (auto q : queries)
+    {
+        for (int i = q[0]; i <= q[1]; i++)
+        {
+            v[i - 1].insert(q[2]);
+        }
+    }
+    vi ans(n, 0);
+    for (int i = 0; i < n; i++)
+    {
+        if (v[i].size() == n)
+        {
+            cout << -1 el;
+            return;
+        }
+        for (int j = 1; j <= n; j++)
+        {
+            if (v[i].find(j) == v[i].end())
+            {
+                ans[i] = j;
+                break;
+            }
+        }
+    }
+    for (auto a : ans)
+    {
+        cout << a ws;
+    }
+    cout el;
 }
 
 int32_t main()
