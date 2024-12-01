@@ -1,5 +1,5 @@
 # File names
-MAIN_SOLUTION="a.cpp"
+MAIN_SOLUTION="soln.cpp"
 GENERATOR="gen.cpp"
 # GENERATOR="gen_tree.cpp"
 BRUTE_FORCE="brute.cpp"
