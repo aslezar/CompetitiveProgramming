@@ -26,13 +26,19 @@
             "type": "cppbuild",
             "command": "/bin/g++",
             "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "-O2",
-                "-I${workspaceFolder}",
+                // imp -> imp for pre-compiled header
+                // -02 -Winvalid-pch -fsanitize=address -std=c++20
+                // Recompile if any above flags are changed
                 "-DLOCAL_RUN",
-                "-Wconversion",
+                "-I${workspaceFolder}",
+                "-O2",
+                "-Winvalid-pch",
+                "-fsanitize=address",
+                "-std=c++20",
                 "-Wall",
+                "-Wconversion", // For conversion warning
+                "-fdiagnostics-color=always", // For color
+                "-g", // For debugging
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
