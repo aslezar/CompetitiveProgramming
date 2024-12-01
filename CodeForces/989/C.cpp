@@ -105,8 +105,6 @@ void solve([[maybe_unused]] ll &_case_no)
         cin >> grid[i];
     }
 
-    vector<vector<char>> dp(n, vector<char>(m, 'U'));
-
     DisjointSet dsu(n * m + 2);
 
     vector<char> ch = {'U', 'D', 'L', 'R'};
@@ -115,73 +113,56 @@ void solve([[maybe_unused]] ll &_case_no)
     {
         for (int j = 0; j < m; j++)
         {
-            switch (grid[i][j])
-            {
-            case 'D':
-            case 'R':
-                break;
-            case '?':
-            {
-                dp[i][j] = 'U';
-                auto [ni, nj] = newCell('U', i, j);
-                char uc = 'G';
-                if (!isOutOfGrid(ni, nj, n, m))
-                {
-                    uc = dp[ni][nj];
-                    if (uc != 'G')
-                    {
-                        dsu.unionT(i * m + j, ni * m + nj);
-                        dsu.unionT(i * m + j, n * m + 1);
-                        dp[i][j] = 'B';
-                    }
-                }
-
-                auto [ni2, nj2] = newCell('L', i, j);
-                char ul = 'G';
-                if (!isOutOfGrid(ni2, nj2, n, m))
-                {
-                    ul = dp[ni2][nj2];
-                    if (ul != 'G')
-                    {
-                        dsu.unionT(i * m + j, ni2 * m + nj2);
-                        dsu.unionT(i * m + j, n * m + 1);
-                        dp[i][j] = 'B';
-                    }
-                }
-            }
-            break;
-
-            case 'U':
-            case 'L':
+            if (grid[i][j] != '?')
             {
                 auto [ni, nj] = newCell(grid[i][j], i, j);
                 if (isOutOfGrid(ni, nj, n, m))
                 {
-                    dp[i][j] = 'G';
+                    dsu.unionT(i * m + j, n * m);
                 }
                 else
                 {
-                    dp[i][j] = dp[ni][nj];
-                    if (dp[i][j] == 'U')
-                    {
-                        dsu.unionT(i * m + j, n * m + 1);
-                        dp[i][j] = dp[ni][nj] = 'B';
-                    }
                     dsu.unionT(i * m + j, ni * m + nj);
                 }
             }
-            break;
+        }
+    }
+    map<int, vector<int>> dp;
+    for (int i = 0; i < n * m; i++)
+    {
+        dp[dsu.parentOf(i)].push_back(i);
+    }
+    debug(dp);
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (grid[i][j] == '?')
+            {
+                int cnt = 0;
+                for (auto c : ch)
+                {
+                    auto [ni, nj] = newCell(c, i, j);
+                    if (isOutOfGrid(ni, nj, n, m) || dsu.parentOf(ni * m + nj) == dsu.parentOf(n * m))
+                    {
+                        cnt++;
+                    }
+                }
+                if (cnt == 4)
+                {
+                    dsu.unionT(i * m + j, n * m);
+                }
             }
         }
     }
     // debug(dp);
 
-    int ans = 0;
+    int ans = n * m;
     for (int i = 0; i < n * m; i++)
     {
-        if (dsu.parentOf(i) == dsu.parentOf(n * m + 1))
+        if (dsu.parentOf(i) == dsu.parentOf(n * m))
         {
-            ans++;
+            ans--;
         }
     }
     cout << ans el;
