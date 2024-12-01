@@ -31,6 +31,8 @@
                 "-O2",
                 "-I${workspaceFolder}",
                 "-DLOCAL_RUN",
+                "-Wconversion",
+                "-Wall",
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
