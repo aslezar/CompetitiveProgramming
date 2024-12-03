@@ -25,39 +25,6 @@ typedef vector<int> vi;
 typedef vector<vector<int>> vii;
 constexpr unsigned int mod = 1e9 + 7;
 
-bool isPossible(int &n, string &s, int &k, int mid)
-{
-
-    int m = mid;
-
-    int i = n - 1;
-    int ans = 0;
-    int cnt[2] = {0};
-    while (i >= 0 && m > 0)
-    {
-        cnt[s[i] - '0']++;
-        if (cnt[1] > cnt[0] || i == m)
-        {
-            while (i > m && s[i - 1] == '1')
-            {
-                cnt[s[i] - '0']++;
-                i--;
-            }
-            int diff = cnt[1] - cnt[0];
-            debug(i, diff, m);
-            ans += (diff * m);
-            m--;
-            cnt[0] = 0;
-            cnt[1] = 0;
-        }
-        i--;
-    }
-
-    debug(ans, mid);
-
-    return ans >= k;
-}
-
 void solve([[maybe_unused]] ll &_case_no)
 {
     int n, k;
@@ -66,27 +33,31 @@ void solve([[maybe_unused]] ll &_case_no)
     string s;
     cin >> s;
 
-    int l = 0, r = n - 1;
-    int ans = INT_MAX;
-    while (l <= r)
+    int diff = 0;
+    vi v;
+    for (int i = n - 1; i > 0; i--)
     {
-        int mid = l + (r - l) / 2;
-        if (isPossible(n, s, k, mid))
-        {
-            ans = min(ans, mid);
-            r = mid - 1;
-        }
+        if (s[i] == '0')
+            diff--;
         else
+            diff++;
+        v.push_back(diff);
+    }
+    sortd(v);
+    // debug(v);
+
+    int sum = 0;
+    for (int i = 0; i < (int)v.size(); i++)
+    {
+        sum += v[i];
+        if (sum >= k)
         {
-            l = mid + 1;
+            cout << i + 2 el;
+            return;
         }
     }
-    if (ans == INT_MAX)
-    {
-        cout << -1 el;
-        return;
-    }
-    cout << ans + 1 el;
+
+    cout << -1 el;
 }
 
 int32_t main()
