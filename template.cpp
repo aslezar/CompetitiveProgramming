@@ -22,6 +22,7 @@ using namespace std;
 
 typedef long long ll;
 typedef vector<int> vi;
+typedef pair<int, int> pii;
 typedef vector<vector<int>> vii;
 constexpr unsigned int mod = 1e9 + 7;
 
@@ -32,7 +33,6 @@ void solve([[maybe_unused]] ll &_case_no)
 
     vi v(n);
     input(v, n);
-
 }
 
 int32_t main()
