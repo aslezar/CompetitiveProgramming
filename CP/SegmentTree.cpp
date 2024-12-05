@@ -43,7 +43,7 @@ class Solution
         }
         // overlaps
         int range_mid = range_low + (range_high - range_low) / 2;
-        return query(seg, 2 * index + 1, range_low, range_mid, l, r) ^ query(seg, 2 * index + 2, range_mid + 2, range_high, l, r);
+        return query(seg, 2 * index + 1, range_low, range_mid, l, r) ^ query(seg, 2 * index + 2, range_mid + 1, range_high, l, r);
     }
 
 public:
