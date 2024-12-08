@@ -81,13 +81,14 @@ const int size_prime = 1e6 + 1;
 int spf[size_prime] = {0};
 void SieveOfEratosthenes()
 {
+    spf[0] = spf[1] = 1;
     for (int i = 2; i * i < size_prime; i++)
     {
         if (spf[i] == 0) // means prime
         {
             for (int j = i * i; j < size_prime; j += i)
             {
-                spf[j] = 1;
+                spf[j] = 1; // means composite
             }
         }
     }

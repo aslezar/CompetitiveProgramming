@@ -103,6 +103,9 @@
         "__tree": "cpp",
         "__locale": "cpp",
         "ios": "cpp",
-        "__string": "cpp"
+        "__string": "cpp",
+        "generator": "cpp",
+        "print": "cpp",
+        "text_encoding": "cpp"
     }
 }
