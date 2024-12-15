@@ -24,7 +24,7 @@ typedef long long ll;
 typedef vector<int> vi;
 typedef vector<vector<int>> vii;
 typedef pair<int, int> pii;
-constexpr unsigned int mod = 1e9 + 7;
+    constexpr unsigned int mod = 1e9 + 7;
 
 void solve([[maybe_unused]] ll &_case_no)
 {
