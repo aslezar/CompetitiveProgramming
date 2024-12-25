@@ -93,3 +93,13 @@ void SieveOfEratosthenes()
         }
     }
 }
+
+template <typename Func, typename... Args>
+void measureTime(const std::string &label, Func func, Args &&...args)
+{
+    auto start = std::chrono::high_resolution_clock::now();
+    func(std::forward<Args>(args)...);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> duration = end - start;
+    std::cout << "Time taken by " << label << ": " << duration.count() << " seconds" << std::endl;
+}
