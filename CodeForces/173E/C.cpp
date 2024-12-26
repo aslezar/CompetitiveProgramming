@@ -26,28 +26,20 @@ typedef vector<vector<int>> vii;
 typedef pair<int, int> pii;
 constexpr unsigned int mod = 1e9 + 7;
 
-int maximumPreSum(vi &v, int i, int j)
+vi maxmin(vi &v, int i, int j)
 {
-    int globalMax = v[i];
-    int localMax = v[i];
-    for (int k = i + 1; k <= j; k++)
+    int globalMax = 0;
+    int localMax = 0;
+    int globalMin = 0;
+    int localMin = 0;
+    for (int k = i; k <= j; k++)
     {
         localMax = max(v[k], localMax + v[k]);
         globalMax = max(globalMax, localMax);
-    }
-    return globalMax;
-}
-
-int minimumPreSum(vi &v, int i, int j)
-{
-    int globalMin = v[i];
-    int localMin = v[i];
-    for (int k = i + 1; k <= j; k++)
-    {
         localMin = min(v[k], localMin + v[k]);
         globalMin = min(globalMin, localMin);
     }
-    return globalMin;
+    return {globalMin, globalMax};
 }
 
 void solve([[maybe_unused]] ll &_case_no)
@@ -70,16 +62,9 @@ void solve([[maybe_unused]] ll &_case_no)
 
     if (s == -1)
     {
-        int mx = maximumPreSum(v, 0, n - 1);
-        int mn = minimumPreSum(v, 0, n - 1);
-        if (mn == 1)
-        {
-            mn = 0;
-        }
-        else if (mx == -1)
-        {
-            mx = 0;
-        }
+        vi v1 = maxmin(v, 0, n - 1);
+        auto &mn = v1[0];
+        auto &mx = v1[1];
         cout << mx - mn + 1 el;
         for (int i = mn; i <= mx; i++)
         {
@@ -91,54 +76,29 @@ void solve([[maybe_unused]] ll &_case_no)
 
     vii intervals;
 
-    vi l = {INT_MAX, INT_MIN};
-    if (s != 0)
+    intervals.push_back(maxmin(v, 0, s - 1));
+    intervals.push_back(maxmin(v, s + 1, n - 1));
+
+    vi l = {0, 0};
+    int sum = 0;
+    for (int i = s - 1; i >= 0; i--)
     {
-        int mx = maximumPreSum(v, 0, s - 1);
-        int mn = minimumPreSum(v, 0, s - 1);
-        intervals.push_back({mn, mx});
-        int sum = 0;
-        for (int i = s - 1; i >= 0; i--)
-        {
-            l[0] = min(l[0], sum + v[i]);
-            l[1] = max(l[1], sum + v[i]);
-            sum += v[i];
-        }
-        intervals.push_back(l);
-        intervals.push_back({min(l[0] + v[s], l[0] + v[s]), max(l[1] + v[s], l[1] + v[s])});
+        sum += v[i];
+        l[0] = min(l[0], sum);
+        l[1] = max(l[1], sum);
     }
 
-    vi r = {INT_MAX, INT_MIN};
-    if (s != n - 1)
+    vi r = {0, 0};
+    sum = 0;
+
+    for (int i = s + 1; i < n; i++)
     {
-        int mx = maximumPreSum(v, s + 1, n - 1);
-        int mn = minimumPreSum(v, s + 1, n - 1);
-        intervals.push_back({mn, mx});
-        int sum = 0;
-        for (int i = s + 1; i < n; i++)
-        {
-            r[0] = min(r[0], sum + v[i]);
-            r[1] = max(r[1], sum + v[i]);
-            sum += v[i];
-        }
-        intervals.push_back({min(r[0] + v[s], r[0] + v[s]), max(r[1] + v[s], r[1] + v[s])});
-        intervals.push_back(r);
+        sum += v[i];
+        r[0] = min(r[0], sum);
+        r[1] = max(r[1], sum);
     }
 
-    if (l[0] != INT_MAX && r[1] != INT_MIN)
-    {
-        if (l[0] + v[s] <= r[1] + v[s])
-            intervals.push_back({l[0] + v[s], r[1] + v[s]});
-        else
-            intervals.push_back({r[1] + v[s], l[0] + v[s]});
-        if (l[1] + v[s] <= r[0] + v[s])
-            intervals.push_back({l[1] + v[s], r[0] + v[s]});
-        else
-            intervals.push_back({r[0] + v[s], l[1] + v[s]});
-    }
-
-    intervals.push_back({v[s], v[s]});
-    intervals.push_back({0, 0});
+    intervals.push_back({l[0] + r[0] + v[s], l[1] + r[1] + v[s]});
 
     sorta(intervals);
     vii merged;
@@ -157,7 +117,6 @@ void solve([[maybe_unused]] ll &_case_no)
         }
     }
 
-    debug(merged);
     int cnt = 0;
     for (auto &m : merged)
     {

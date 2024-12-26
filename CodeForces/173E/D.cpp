@@ -31,29 +31,30 @@ void solve([[maybe_unused]] ll &_case_no)
     int l, r, g;
     cin >> l >> r >> g;
 
-    int rr = r;
+    int l1 = (l + g - 1) / g, r1 = r / g;
+
+    debug(l1, r1);
 
     int ans1 = -1, ans2 = -1;
-    for (int i = l; i <= rr; i++)
+    for (int i = l1; i <= min(r1, l1 + 30); i++)
     {
-        if (i % g == 0)
+        for (int j = r1; j >= max(i, r1 - 30); j--)
         {
-            if (rr < g)
-                break;
-            int x = (rr - g) / i;
-            int v = g + (i * x);
-            if (v >= l && v <= r && __gcd(i, v) == g)
+            if (__gcd(i, j) == 1)
             {
-                if (ans1 == -1 || ans2 - ans1 < v - i)
+                if (ans1 == -1 || abs(j - i) > abs(ans2 - ans1))
                 {
+                    debug(ans1, ans2);
+                    debug(i, j);
                     ans1 = i;
-                    ans2 = v;
-                    rr = v;
+                    ans2 = j;
                 }
             }
         }
     }
-    cout << ans1 << ' ' << ans2 el;
+    if (ans1 == -1)
+        g = 1;
+    cout << ans1 * g << ' ' << ans2 * g << endl;
 }
 
 int32_t main()
