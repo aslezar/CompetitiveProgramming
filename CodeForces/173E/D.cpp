@@ -36,9 +36,9 @@ void solve([[maybe_unused]] ll &_case_no)
     debug(l1, r1);
 
     int ans1 = -1, ans2 = -1;
-    for (int i = l1; i <= min(r1, l1 + 30); i++)
+    for (int i = l1; i <= min(r1, l1 + 18); i++)
     {
-        for (int j = r1; j >= max(i, r1 - 30); j--)
+        for (int j = r1; j >= max(i, r1 -18); j--)
         {
             if (__gcd(i, j) == 1)
             {
