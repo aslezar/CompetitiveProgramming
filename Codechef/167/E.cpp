@@ -80,7 +80,6 @@ void solve([[maybe_unused]] ll &_case_no)
 
     if ((n / 2) % 2 == 1)
     {
-
         int start = n / 2;
         for (int i = 0; i < n; i++)
         {
@@ -98,12 +97,8 @@ void solve([[maybe_unused]] ll &_case_no)
     {
         for (int i = 0; i < n; i += 2)
         {
-            v[i][0] = (i + n) % n + 1;
-        }
-        for (int i = 0; i < n; i += 2)
-        {
-            int j = 1;
-            int no = v[i][0] - 1;
+            int no = (i + n) % n + 1;
+            int j = 0;
             while (j < n && no >= 1)
             {
                 v[i][j] = no;
