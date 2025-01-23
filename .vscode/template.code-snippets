@@ -99,7 +99,6 @@
             "{",
             "    Solution s;",
             "",
-            "    cout << s.checkTwoChessboards(\"a1\");",
             "    cout << '\\n';",
             "",
             "    return 0;",
