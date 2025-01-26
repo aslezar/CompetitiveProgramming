@@ -6,3 +6,13 @@ export CPLUS_INCLUDE_PATH=/path/to/headers:$CPLUS_INCLUDE_PATH
 # use different flags if running with differnet flags
 # -Winvalid-pch will tell if pre-compiler header file is used or not
 sudo g++ -DLOCAL_RUN -I/media/histox/LinuxFiles/Files/CompetitiveProgramming -O2 -Wall -Wconversion -Winvalid-pch -fdiagnostics-color=always -fsanitize=address -g -std=c++20 /usr/include/x86_64-linux-gnu/c++/13/bits/stdc++.h
+
+
+// Problem Discuss
+// Question Ask
+// Test Case Discuss
+// Edge Case Discuss
+// Brute Force
+// Optimize
+// Dry Run
+// Time Complexity
