@@ -1,0 +1,109 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#ifdef LOCAL_RUN
+#include "debug.cpp"
+#else
+#define debug(...)
+#define debugArr(...)
+#endif
+
+#define int long long
+#define all(a) (a).begin(), (a).end()
+#define rall(a) (a).rbegin(), (a).rend()
+#define sorta(a) sort(all(a))
+#define sortd(a) sort(rall(a))
+#define input(vec, n)           \
+    for (int i = 0; i < n; i++) \
+        std::cin >> vec[i];
+
+#define el << endl;
+#define ws << " ";
+
+typedef long long ll;
+typedef vector<int> vi;
+typedef vector<vector<int>> vii;
+typedef pair<int, int> pii;
+constexpr unsigned int mod = 1e9 + 7;
+
+void solve([[maybe_unused]] ll &_case_no)
+{
+    ll n = 0;
+    cin >> n;
+
+    vi v(n);
+    input(v, n);
+
+    if (n <= 2)
+    {
+        cout << "YES\n";
+        return;
+    }
+
+    unordered_map<int, int> indexOf;
+    for (int i = 0; i < n; i++)
+    {
+        indexOf[v[i]] = i;
+    }
+    debug(indexOf);
+
+    if (!((indexOf[1] == 0 && indexOf[2] == n - 1) || (indexOf[1] == n - 1 && indexOf[2] == 0)))
+    {
+        debug("Here");
+        cout << "NO\n";
+        return;
+    }
+
+    auto comp = [](const pii &a, const pii &b) -> bool
+    {
+        return a.second - a.first > b.second - b.first;
+    };
+    set<pair<int, int>, decltype(comp)> interval(comp);
+    set<int> seated;
+
+    seated.insert(0);
+    seated.insert(n - 1);
+    interval.insert({0, n - 1});
+
+    for (int i = 3; i <= n; i++)
+    {
+        int index = indexOf[i];
+        auto r = seated.upper_bound(index);
+        auto l = prev(r);
+        int len = min(index - *l, *r - index);
+
+        // len of first interval
+        auto it = interval.begin();
+        int maxLen = it->second - it->first;
+        if (len < maxLen / 2)
+        {
+            debug(*l, *r);
+            debug(i, len, maxLen, index);
+            cout << "NO\n";
+            return;
+        }
+
+        // remove interval
+        interval.erase({*l, *r});
+        interval.insert({*l, index});
+        interval.insert({index, *r});
+
+        seated.insert(index);
+    }
+    cout << "YES\n";
+}
+
+int32_t main()
+{
+    // freopen("input.txt", "r", stdin);
+    // freopen("output.txt", "w", stdout);
+    ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(0);
+    ll t = 1;
+    cin >> t;
+    for (ll i = 0; i < t; i++)
+    {
+        // cout << "Case #" << i + 1 << ": ";
+        solve(i);
+    }
+    return 0;
+}
