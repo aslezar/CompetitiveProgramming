@@ -19,8 +19,8 @@ public:
         {
             if (vis[i])
                 continue;
-            q.push(0);
-            vis[0] = true;
+            q.push(i);
+            vis[i] = true;
 
             while (!q.empty())
             {
