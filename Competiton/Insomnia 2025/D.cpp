@@ -33,12 +33,44 @@ void solve([[maybe_unused]] ll &_case_no)
 
     debug(n);
 
-    vi v(n);
-    for (int i = 0; i < n; i++)
+    vi v(4, 0);
+    int sum = 0;
+    for (int i = 0; i < 4; i++)
     {
-        cout << "? " << (i - 1 + n) % n << " " << i << " " << (i + 1) % n << "\n";
+
+        cout << "?";
+        for (int j = 0; j < 4; j++)
+        {
+            if (j != i)
+            {
+                cout << " " << j + 1;
+            }
+        }
+        cout << endl;
         cin >> v[i];
+        sum += v[i];
     }
+    debug(sum);
+    sum /= 3;
+    for (int i = 0; i < 4; i++)
+    {
+        v[i] = sum - v[i];
+    }
+
+    for (int i = 4; i < n; i++)
+    {
+        cout << "? 1 2 " << i + 1 << endl;
+        int t = 0;
+        cin >> t;
+        v.push_back(t - v[0] - v[1]);
+    }
+    debug(v);
+    cout << "! ";
+    for (int i = 0; i < v.size(); i++)
+    {
+        cout << v[i] << " ";
+    }
+    cout << endl;
 }
 
 int32_t main()
