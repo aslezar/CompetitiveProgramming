@@ -31,29 +31,47 @@ void solve([[maybe_unused]] ll &_case_no)
     ll n = 0;
     cin >> n;
 
-    ll m = 0;
+    int m = 0;
     cin >> m;
 
-    vi v(m);
-    input(v, m);
+    vi S(m + 1);
+    for (int i = 1; i <= m; i++)
+    {
+        cin >> S[i];
+    }
+    debug(S);
 
-    int sum = 0;
-    for (int i = 0; i < m; i++)
+    vi A(m + 1, 0);
+    vector<pii> mxmn(2);
+    for (int i = 1; i <= m; i++)
     {
-        sum += v[i];
+        A[i] = S[i] - A[i - 1];
+        mxmn[i & 1].first = max(mxmn[i & 1].first, A[i]);
+        mxmn[i & 1].second = min(mxmn[i & 1].second, A[i]);
     }
-    int ans = 0;
-    if (sum & 1)
+    unordered_set<int> vis;
+    for (int i = 1; i <= m; i += 2)
     {
-        cout << ans << '\n';
-        return;
+        if (vis.find(A[i]) != vis.end())
+        {
+            cout << 0 << endl;
+            return;
+        }
+        vis.insert(A[i]);
     }
 
-    vi series = {1};
-    for (int i = 0; i < m; i++)
+    vis.clear();
+    for (int i = 0; i <= m; i += 2)
     {
-        series.push_back(v[i] - series.back());
+        if (vis.find(A[i]) != vis.end())
+        {
+            cout << 0 << endl;
+            return;
+        }
+        vis.insert(A[i]);
     }
+    debug(mxmn);
+    debug(A);
 }
 
 int32_t main()
