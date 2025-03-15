@@ -16,3 +16,25 @@ sudo g++ -DLOCAL_RUN -I/media/histox/LinuxFiles/Files/CompetitiveProgramming -O2
 // Optimize
 // Dry Run
 // Time Complexity
+
+cp
+planme
+cp-folder
+
+segment tree
+fft
+kkmp
+
+pbds
+
+
+
+all cp algo
+seg tree
+fft
+kkmp
+rban karp
+pbds
+template
+dsu
+bit
